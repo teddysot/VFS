@@ -13,8 +13,9 @@ int main()
 	c.ShiftGearUp();
 
 	c.ShiftGearDown();
-
-	c.AcceleratorPeddleDown(2.0f);
+	
+	c.AcceleratorPeddleDown(1.1f);
+	c.AcceleratorPeddleReleased(-0.5f);
 
 	c.HornPressed();
 	c.HornReleased();
