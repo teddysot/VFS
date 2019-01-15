@@ -89,9 +89,9 @@ void Car::AcceleratorPeddleDown(float speedDelta)
 
 	std::cout << "[AcceleratorPeddleDown] Initial Speed: " << mSpeed << std::endl;
 	std::cout << "[AcceleratorPeddleDown] Acceleration: " << speedDelta << std::endl;
-	std::cout << "[AcceleratorPeddleDown] Assuming peddle down for 2 second" << std::endl;
+	//std::cout << "[AcceleratorPeddleDown] Assuming peddle down for 2 second" << std::endl;
 	// Final Speed = Initial Speed + (Acceleration * Time)
-	mSpeed = mSpeed + (speedDelta * 2);
+	mSpeed = mSpeed + (speedDelta);
 	std::cout << "[AcceleratorPeddleDown] Final Speed: " << mSpeed << std::endl;
 }
 
@@ -105,9 +105,9 @@ void Car::AcceleratorPeddleReleased(float speedDelta)
 	
 	std::cout << "[AcceleratorPeddleUp] Initial Speed: " << mSpeed << std::endl;
 	std::cout << "[AcceleratorPeddleUp] Acceleration: " << speedDelta << std::endl;
-	std::cout << "[AcceleratorPeddleUp] Assuming peddle up for 2 second" << std::endl;
+	//std::cout << "[AcceleratorPeddleUp] Assuming peddle up for 2 second" << std::endl;
 	// Final Speed = Initial Speed + (Acceleration * Time)
-	mSpeed = mSpeed + (speedDelta * 2);
+	mSpeed = mSpeed - (speedDelta);
 	std::cout << "[AcceleratorPeddleUp] Final Speed: " << mSpeed << std::endl;
 }
 
