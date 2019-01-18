@@ -45,6 +45,7 @@ namespace Bonus_Exercise
 
             Console.WriteLine("Fahrenheit: {0}", f);
             Console.WriteLine("Celsius: {0}", c);
+            CheckTemperature(c, f);
         }
 
         static void CelsiusToFarenheit()
@@ -58,6 +59,21 @@ namespace Bonus_Exercise
 
             Console.WriteLine("Celsius: {0}", c);
             Console.WriteLine("Fahrenheit: {0}", f);
+            CheckTemperature(c, f);
+        }
+
+        static void CheckTemperature(float c, float f)
+        {
+            if (c >= 100.0f || f >= 212.0f)
+            {
+                Console.WriteLine("Careful! Hot temperature!");
+                //return;
+            }
+            else if (c <= 0.0f || f <= 32.0f)
+            {
+                Console.WriteLine("Careful! Freezing temperature!");
+                //return;
+            }
         }
     }
 }

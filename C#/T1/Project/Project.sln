@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W1", "W1\W1.csproj", "{54476864-A6E4-4954-8F63-18B2961C6B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project", "Project\Project.csproj", "{54476864-A6E4-4954-8F63-18B2961C6B55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise1", "Exercise1\Exercise1.csproj", "{DAD078B1-D51A-46B7-8012-1FF32570D46C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercise1", "Exercise1\Exercise1.csproj", "{DAD078B1-D51A-46B7-8012-1FF32570D46C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise2", "Exercise2\Exercise2.csproj", "{5251AA6B-18FD-46EB-9EE3-1BB5FA997935}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercise2", "Exercise2\Exercise2.csproj", "{5251AA6B-18FD-46EB-9EE3-1BB5FA997935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonus_Exercise", "Bonus_Exercise\Bonus_Exercise.csproj", "{BF0CC3D4-5153-452F-811B-B3AC0A469284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bonus_Exercise", "Bonus_Exercise\Bonus_Exercise.csproj", "{BF0CC3D4-5153-452F-811B-B3AC0A469284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonus_Bonus_Exercise", "Bonus_Bonus_Exercise\Bonus_Bonus_Exercise.csproj", "{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bonus_Bonus_Exercise", "Bonus_Bonus_Exercise\Bonus_Bonus_Exercise.csproj", "{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1605698C-0B9D-4F9C-B291-E686BF6350E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollatZ_Conjecture", "CollatZ_Conjecture\CollatZ_Conjecture.csproj", "{B92E1B65-80FE-4805-8FB0-02EA458532D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1605698C-0B9D-4F9C-B291-E686BF6350E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1605698C-0B9D-4F9C-B291-E686BF6350E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1605698C-0B9D-4F9C-B291-E686BF6350E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1605698C-0B9D-4F9C-B291-E686BF6350E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
