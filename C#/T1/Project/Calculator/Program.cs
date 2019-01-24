@@ -79,40 +79,32 @@ namespace Calculator
             // Loop if input is not null
             while (operation != null)
             {
-                if (operation == "+")
+                switch(operation)
                 {
-                    printResult(num1, num2, num1 + num2, operation);
-                    break;
-                }
-                else if (operation == "-")
-                {
-                    printResult(num1, num2, num1 - num2, operation);
-                    break;
-                }
-                else if (operation == "*")
-                {
-                    printResult(num1, num2, num1 * num2, operation);
-                    break;
-                }
-                else if (operation == "/")
-                {
-                    printResult(num1, num2, num1 / num2, operation);
-                    break;
-                }
-                else if (operation == "%")
-                {
-                    printResult(num1, num2, num1 % num2, operation);
-                    break;
-                }
-                else if (operation == "p" || operation == "P")
-                {
-                    printResult(num1, num2, ((float)Math.Pow(num1,num2)), operation);
-                    break;
-                }
-                else
-                {
-                    // Print out error
-                    Console.WriteLine("[Invalid Input] Unknown operator");
+                    case "+":
+                        printResult(num1, num2, num1 + num2, operation);
+                        return;
+                    case "-":
+                        printResult(num1, num2, num1 - num2, operation);
+                        return;
+                    case "*":
+                        printResult(num1, num2, num1 * num2, operation);
+                        return;
+                    case "/":
+                        printResult(num1, num2, num1 / num2, operation);
+                        return;
+                    case "%":
+                        printResult(num1, num2, num1 % num2, operation);
+                        return;
+                    case "p":
+                    case "P":
+                        printResult(num1, num2, ((float)Math.Pow(num1, num2)), operation);
+                        return;
+                    default:
+                        // Print out error
+                        Console.WriteLine("[Invalid Input] Unknown operator");
+                        break;
+
                 }
 
                 Console.WriteLine("Choose your operator[ + , - , *, / , % ]");

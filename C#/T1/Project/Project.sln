@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project", "Project\Project.csproj", "{54476864-A6E4-4954-8F63-18B2961C6B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld", "Project\HelloWorld.csproj", "{54476864-A6E4-4954-8F63-18B2961C6B55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercise1", "Exercise1\Exercise1.csproj", "{DAD078B1-D51A-46B7-8012-1FF32570D46C}"
 EndProject
@@ -13,11 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bonus_Exercise", "Bonus_Exe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bonus_Bonus_Exercise", "Bonus_Bonus_Exercise\Bonus_Bonus_Exercise.csproj", "{EFB75471-A3AF-4C6C-A5B0-7F382C3C0457}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1605698C-0B9D-4F9C-B291-E686BF6350E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{1605698C-0B9D-4F9C-B291-E686BF6350E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{3D344F80-A9D5-4324-9BEC-3CE53F09A2AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollatZ_Conjecture", "CollatZ_Conjecture\CollatZ_Conjecture.csproj", "{B92E1B65-80FE-4805-8FB0-02EA458532D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollatZ_Conjecture", "CollatZ_Conjecture\CollatZ_Conjecture.csproj", "{B92E1B65-80FE-4805-8FB0-02EA458532D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray1", "W3_Exercise1\StudentArray1.csproj", "{1FAD1838-86A9-4B7A-8016-472E613DEA4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray2", "W3_Exercise2\StudentArray2.csproj", "{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray3", "W3_BonusExercise\StudentArray3.csproj", "{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleNumber", "W3_2_Exercise1\TriangleNumber.csproj", "{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +65,22 @@ Global
 		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B92E1B65-80FE-4805-8FB0-02EA458532D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FAD1838-86A9-4B7A-8016-472E613DEA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAD1838-86A9-4B7A-8016-472E613DEA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAD1838-86A9-4B7A-8016-472E613DEA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAD1838-86A9-4B7A-8016-472E613DEA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
