@@ -19,13 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fibonacci", "Fibonacci\Fibo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollatZ_Conjecture", "CollatZ_Conjecture\CollatZ_Conjecture.csproj", "{B92E1B65-80FE-4805-8FB0-02EA458532D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray1", "W3_Exercise1\StudentArray1.csproj", "{1FAD1838-86A9-4B7A-8016-472E613DEA4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentArray1", "W3_Exercise1\StudentArray1.csproj", "{1FAD1838-86A9-4B7A-8016-472E613DEA4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray2", "W3_Exercise2\StudentArray2.csproj", "{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentArray2", "W3_Exercise2\StudentArray2.csproj", "{5AF71DE1-EF70-4C56-BDC9-5FF280FFC960}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentArray3", "W3_BonusExercise\StudentArray3.csproj", "{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentArray3", "W3_BonusExercise\StudentArray3.csproj", "{39C91217-21EE-4791-88CE-0AD9E1EE7AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleNumber", "W3_2_Exercise1\TriangleNumber.csproj", "{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriangleNumber", "W3_2_Exercise1\TriangleNumber.csproj", "{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackAlleyDiceShooter", "BackAlleyDiceShooter\BackAlleyDiceShooter.csproj", "{A87DC318-F2CB-44C4-B0FE-D5ADBB4E9F87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D5460F4-ABCF-4F1A-B93F-EDF52A82810C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87DC318-F2CB-44C4-B0FE-D5ADBB4E9F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87DC318-F2CB-44C4-B0FE-D5ADBB4E9F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87DC318-F2CB-44C4-B0FE-D5ADBB4E9F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87DC318-F2CB-44C4-B0FE-D5ADBB4E9F87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
