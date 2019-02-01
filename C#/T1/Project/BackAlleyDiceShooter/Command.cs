@@ -6,142 +6,218 @@ namespace BackAlleyDiceShooter
 {
     class Commands
     {
-        /* 
-           1. Big 
-           2. Small 
-           3. Odd 
-           4. Even
-           5. All 1s 
-           6. All 2s 
-           7. All 3s 
-           8. All 4s
-           9. All 5s 
-           10. All 6s 
-           11. Double 1s 
-           12. Double 2s
-           13. Double 3s 
-           14. Double 4s 
-           15. Double 5s 
-           16. Double 6s
-           17. Any triples 
-           18. 4 or 17 
-           19. 5 or 16 
-           20. 6 or 15
-           21. 7 or 14 
-           22. 8 or 13 
-           23. 9 or 12 
-           24. 10 or 11
-         */
-        public static void checkCommands(int command)
+        public static void checkCommands(string command)
         {
             // Check command from player intput
-            switch (command)
+            int temp;
+            while (!int.TryParse(command, out temp) || temp < 1 || temp > 24)
+            {
+                // Print out error
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("[HOST] ");
+                Console.ResetColor();
+                Console.Write("Invalid command!\n");
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("[HOST] ");
+                Console.ResetColor();
+                Console.Write("Choose your bet again: ");
+                command = Console.ReadLine();
+            }
+
+            Host.askForBetAmount();
+
+            betType bet = (betType)temp;
+
+            switch (bet)
             {
                 // Big
-                case 1:
-                    Player.setMove(1);
-                    Console.WriteLine("[{0}] chose Big", Player.getName());
+                case betType.Big:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Big\n\n");
+                    Betting.bigBet();
                     break;
+
                 // Small
-                case 2:
-                    Player.setMove(2);
-                    Console.WriteLine("[{0}] chose Small", Player.getName());
+                case betType.Small:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Small\n\n");
+                    Betting.smallBet();
                     break;
+
                 // Odd
-                case 3:
-                    Player.setMove(3);
-                    Console.WriteLine("[{0}] chose Odd", Player.getName());
+                case betType.Odd:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Odd\n\n");
+                    Betting.oddBet();
                     break;
+
                 // Even
-                case 4:
-                    Player.setMove(4);
-                    Console.WriteLine("[{0}] chose Even", Player.getName());
+                case betType.Even:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Even\n\n");
+                    Betting.evenBet();
                     break;
+
                 // Triples
-                case 5:
-                    Player.setMove(5);
-                    Console.WriteLine("[{0}] chose All 1s", Player.getName());
+                case betType.All1s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 1s\n\n");
+                    Betting.allTrippleBet(1);
                     break;
-                case 6:
-                    Player.setMove(6);
-                    Console.WriteLine("[{0}] chose All 2s", Player.getName());
+                case betType.All2s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 2s\n\n");
+                    Betting.allTrippleBet(2);
                     break;
-                case 7:
-                    Player.setMove(7);
-                    Console.WriteLine("[{0}] chose All 3s", Player.getName());
+                case betType.All3s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 3s\n\n");
+                    Betting.allTrippleBet(3);
                     break;
-                case 8:
-                    Player.setMove(8);
-                    Console.WriteLine("[{0}] chose All 4s", Player.getName());
+                case betType.All4s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 4s\n\n");
+                    Betting.allTrippleBet(4);
                     break;
-                case 9:
-                    Player.setMove(9);
-                    Console.WriteLine("[{0}] chose All 5s", Player.getName());
+                case betType.All5s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 5s\n\n");
+                    Betting.allTrippleBet(5);
                     break;
-                case 10:
-                    Player.setMove(10);
-                    Console.WriteLine("[{0}] chose All 6s", Player.getName());
+                case betType.All6s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose All 6s\n\n");
+                    Betting.allTrippleBet(6);
                     break;
-                case 11:
-                    // Doubles
-                    Player.setMove(11);
-                    Console.WriteLine("[{0}] chose Double 1s", Player.getName());
+
+                // Doubles
+                case betType.Double1s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 1s\n\n");
+                    Betting.allDoubleBet(1);
                     break;
-                case 12:
-                    Player.setMove(12);
-                    Console.WriteLine("[{0}] chose Double 2s", Player.getName());
+                case betType.Double2s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 2s\n\n");
+                    Betting.allDoubleBet(2);
                     break;
-                case 13:
-                    Player.setMove(13);
-                    Console.WriteLine("[{0}] chose Double 3s", Player.getName());
+                case betType.Double3s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 3s\n\n");
+                    Betting.allDoubleBet(3);
                     break;
-                case 14:
-                    Player.setMove(14);
-                    Console.WriteLine("[{0}] chose Double 4s", Player.getName());
+                case betType.Double4s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 4s\n\n");
+                    Betting.allDoubleBet(4);
                     break;
-                case 15:
-                    Player.setMove(15);
-                    Console.WriteLine("[{0}] chose Double 5s", Player.getName());
+                case betType.Double5s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 5s\n\n");
+                    Betting.allDoubleBet(5);
                     break;
-                case 16:
-                    Player.setMove(16);
-                    Console.WriteLine("[{0}] chose Double 6s", Player.getName());
+                case betType.Double6s:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Double 6s\n\n");
+                    Betting.allDoubleBet(6);
                     break;
+
                 // Any Triple
-                case 17:
-                    Player.setMove(17);
-                    Console.WriteLine("[{0}] chose Any triples", Player.getName());
+                case betType.Anytriples:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose Any triples\n\n");
+                    Betting.anyTrippleBet();
                     break;
+
                 // Sums
-                case 18:
-                    Player.setMove(18);
-                    Console.WriteLine("[{0}] chose 4 or 17", Player.getName());
+                case betType.fourOrSeventeen:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 4 or 17\n\n");
+                    Betting.fourOrSeventeenBet();
                     break;
-                case 19:
-                    Player.setMove(19);
-                    Console.WriteLine("[{0}] chose 5 or 16", Player.getName());
+                case betType.fiveOrSixteen:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 5 or 16\n\n");
+                    Betting.fiveOrSixteenBet();
                     break;
-                case 20:
-                    Player.setMove(20);
-                    Console.WriteLine("[{0}] chose 6 or 15", Player.getName());
+                case betType.sixOrFifteen:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 6 or 15\n\n");
+                    Betting.sixOrfifteenBet();
                     break;
-                case 21:
-                    Player.setMove(21);
-                    Console.WriteLine("[{0}] chose 7 or 14", Player.getName());
+                case betType.sevenOrFourteen:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 7 or 14\n\n");
+                    Betting.sevenOrfourteenBet();
                     break;
-                case 22:
-                    Player.setMove(22);
-                    Console.WriteLine("[{0}] chose 8 or 13", Player.getName());
+                case betType.eightOrThirteen:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 8 or 13");
+                    Betting.eightOrthirteenBet();
                     break;
-                case 23:
-                    Player.setMove(23);
-                    Console.WriteLine("[{0}] chose 9 or 12", Player.getName());
+                case betType.nineOrTwelve:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 9 or 12");
+                    Betting.nineOrtwelveBet();
                     break;
-                case 24:
-                    Player.setMove(24);
-                    Console.WriteLine("[{0}] chose 10 or 11", Player.getName());
+                case betType.tenOrEleven:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("\n[{0}] ", Player.getName());
+                    Console.ResetColor();
+                    Console.Write("I choose 10 or 11\n\n");
+                    Betting.tenOrelevenBet();
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("[HOST] ");
+                    Console.ResetColor();
                     Console.WriteLine("Invalid command!");
                     break;
             }

@@ -7,19 +7,21 @@ namespace BackAlleyDiceShooter
     class Player
     {
         // Player members
+        private static int startBalance = 200;
+
         private static string playerName;
 
         private static int playerBalance;
 
         private static int playerBetAmount;
 
-        private static int playerMove;
+        private static int playerChoice;
 
         // Player Constructor
-        public Player(string pName, int pBalance)
+        public Player(string pName)
         {
             playerName = pName;
-            playerBalance = pBalance;
+            playerBalance = startBalance;
         }
 
         // Get Functions
@@ -38,9 +40,9 @@ namespace BackAlleyDiceShooter
             return playerBetAmount;
         }
 
-        public static int getMove()
+        public static int getChoice()
         {
-            return playerMove;
+            return playerChoice;
         }
 
         // Set Functions
@@ -54,15 +56,15 @@ namespace BackAlleyDiceShooter
             playerBetAmount = amount;
         }
 
-        public static void setMove(int move)
+        public static void setChoice(int choice)
         {
-            playerMove = move;
+            playerChoice = choice;
         }
 
         // Reset Balance
         public static void resetMoney()
         {
-            playerBalance = 200;
+            playerBalance = startBalance;
         }
     }
 }

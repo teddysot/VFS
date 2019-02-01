@@ -8,11 +8,40 @@ namespace BackAlleyDiceShooter
     {
         public static string playerName;
 
+        public static void showWelcomeScreen()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("=========================================================================\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                    Welcome to Back Alley Dice Shooter              \n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("                     Press any key to start the game                    \n\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("=========================================================================\n");
+            Console.ResetColor();
+            Console.ReadLine();
+        }
+
+        public static void showEndScreen()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("=========================================================================\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("                                Good Bye!              \n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("                     Press any key to exit the game                    \n\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("=========================================================================\n");
+            Console.ResetColor();
+            Console.ReadLine();
+        }
+
         public static void startGame()
         {
             // Start the game
             playerName = Host.askPlayerName();
-            Player player = new Player(playerName, 200);
+            Player player = new Player(playerName);
         }
         public static bool checkWin()
         {
@@ -34,21 +63,39 @@ namespace BackAlleyDiceShooter
             return false;
         }
 
-        public static int getBetAmount(string s)
+        public static string askToPlayAgain()
         {
-            // Initialize variable
-            int playerInput = 0;
+            string input = "";
 
-            while (!int.TryParse(s, out playerInput))
+            while (input != "y" || input != "Y" || input != "n" || input != "N")
             {
-                // Print out error
-                Console.WriteLine("[Invalid Input] Not a number");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("\n\n[HOST] ");
+                Console.ResetColor();
+                Console.Write("Do you want to play again?\n");
 
-                Console.Write("Enter bet amount again: ");
-                s = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("Y - Yes");
+                Console.ResetColor();
+                Console.Write(" | ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("N - No\n");
+                Console.ResetColor();
+                input = Console.ReadLine();
+                if (input == "y" || input == "Y" || input == "n" || input == "N")
+                {
+                    Player.resetMoney();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("[HOST] ");
+                    Console.ResetColor();
+                    Console.Write("Invalid Input!");
+                }
             }
-
-            return playerInput;
+            return input;
         }
     }
 }
