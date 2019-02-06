@@ -67,30 +67,122 @@ public:
 		}
 		else
 		{
-			mTail->mNext = newNode->mNext;
+			mTail->mNext = newNode;
 			mTail = newNode;
 		}
 	}
 
 	T* GetHead() 
 	{
-		return &mHead;
+		return mHead->nData;
 	}
 
 	T* GetTail() 
 	{
-		return &mTail;
+		return mTail->nData;
 	}
 
-	int GetSize() {}
+	int GetSize() 
+	{
+		int count = 0;
+		if (mHead == nullptr)
+		{
+			return count;
+		}
 
-	T* GetAt(int nIndex) {}
+		Node<T>* pNode = mHead;
 
-	void RemoveAt(int nIndex) {}
+		while (pNode != nullptr)
+		{
+			count++;
+			pNode = pNode->mNext;
+		}
 
-	bool Remove(T* pData) {}
+		delete pNode;
+		return count;
+	}
 
-	LinkedList* Clone() {}
+	T* GetAt(int nIndex) 
+	{
+		Node<T>* pNode = mHead;
+
+		if (nIndex == 0)
+		{
+			return pNode->nData;
+		}
+
+		for (int i = 0; i < nIndex; i++)
+		{
+			pNode = mHead->mNext;
+		}
+
+		T* result = pNode->nData;
+
+		delete pNode;
+		return result;
+	}
+
+	void RemoveAt(int nIndex)
+	{
+		if (mHead == nullptr)
+		{
+			return;
+		}
+
+		Node<T>* temp = mHead;
+		if (mHead != nullptr)
+		{
+			for (int i = 0; i < nIndex; i++)
+			{
+				temp = temp->mNext;
+
+				if (i == nIndex)
+				{
+					mHead->mNext = temp;
+				}
+			}
+		}
+		delete temp;
+	}
+
+	bool Remove(T* pData) 
+	{
+		if (mHead == nullptr)
+		{
+			return false;
+		}
+
+		Node<T>* temp = mHead;
+		while (mHead != nullptr)
+		{
+			if (mHead->nData == pData)
+			{
+				Node<T>* pNode = temp->mNext;
+				temp->mNext = temp->mNext->mNext;
+				mHead = temp;
+				delete pNode;
+
+				return true;
+			}
+			mHead = mHead->mNext;
+		}
+
+		return false;
+	}
+
+	LinkedList<T>* Clone() 
+	{
+		LinkedList<T>* temp = new LinkedList<T>();
+		Node<T>* cur = mHead;
+
+		while (cur != nullptr)
+		{
+			temp->AddAtTail(cur->nData);
+			cur = cur->mNext;
+		}
+
+		return temp;
+	}
 
 	bool find(T* nData)
 	{
@@ -148,14 +240,32 @@ private:
 void main()
 {
 	LinkedList<int> ll;
+	LinkedList<int>* ll2;
 
 	int data1 = 4;
 	int data2 = 2;
 	int data3 = 3;
+	int data4 = 1;
+	int data5 = 6;
+	int data6 = 5;
 
 	ll.AddAtHead(&data1);
 	ll.AddAtHead(&data2);
 	ll.AddAtTail(&data3);
+	ll.AddAtTail(&data4);
+	ll.AddAtTail(&data5);
+	ll.AddAtTail(&data6);
 
 	ll.remove(&data1);
+	ll.RemoveAt(1);
+
+	ll2 = ll.Clone();
+
+	cout << "Size: " << ll.GetSize() << endl;
+	cout << "Head: " << *ll.GetHead() << endl;
+	cout << "Tail: " << *ll.GetTail() << endl;
+	cout << "LinkedList at 1: " << *ll.GetAt(1) << endl;
+
+
+	system("pause");
 }
