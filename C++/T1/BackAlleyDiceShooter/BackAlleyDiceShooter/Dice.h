@@ -7,7 +7,7 @@ public:
 	~Dice();
 
 	// Get dice value
-	const int getDiceValue();
+	const int getDiceValue() const;
 
 	// Random int
 	int nRandom();

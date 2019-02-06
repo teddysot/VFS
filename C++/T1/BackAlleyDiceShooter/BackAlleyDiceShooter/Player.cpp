@@ -13,22 +13,22 @@ Player::~Player()
 {
 }
 
-const std::string Player::getName()
+const std::string Player::getName() const
 {
 	return playerName;
 }
 
-const int Player::getBalance()
+const int Player::getBalance() const
 {
 	return playerBalance;
 }
 
-const int Player::getBetAmount()
+const int Player::getBetAmount() const
 {
 	return playerBetAmount;
 }
 
-const int Player::getChoice()
+const int Player::getChoice() const
 {
 	return playerChoice;
 }

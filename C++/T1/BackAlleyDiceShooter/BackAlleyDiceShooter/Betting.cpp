@@ -12,6 +12,7 @@ Betting::Betting()
 
 Betting::~Betting()
 {
+	delete[] dices;
 }
 
 void Betting::rollThreeDices()
@@ -31,12 +32,12 @@ void Betting::rollThreeDices()
 	cout << "========================" << endl;
 }
 
-const int Betting::getTripple()
+const int Betting::getTripple() const
 {
 	return nTriple;
 }
 
-const int Betting::getDouble()
+const int Betting::getDouble() const
 {
 	return nDouble;
 }

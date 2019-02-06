@@ -38,8 +38,8 @@ public:
 	Betting();
 	~Betting();
 
-	const int getTripple();
-	const int getDouble();
+	const int getTripple() const;
+	const int getDouble() const;
 
 	void setTripple(int t);
 	void setDouble(int d);

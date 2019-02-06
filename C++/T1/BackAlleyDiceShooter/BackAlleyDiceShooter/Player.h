@@ -9,10 +9,10 @@ public:
 	~Player();
 
 	// Get Functions
-	const std::string getName();
-	const int getBalance();
-	const int getBetAmount();
-	const int getChoice();
+	const std::string getName() const;
+	const int getBalance() const;
+	const int getBetAmount() const;
+	const int getChoice() const;
 
 	// Set Functions
 	void setName(std::string pName);

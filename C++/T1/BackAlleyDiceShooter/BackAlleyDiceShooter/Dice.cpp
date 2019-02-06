@@ -9,7 +9,7 @@ Dice::Dice()
 Dice::~Dice()
 {}
 
-const int Dice::getDiceValue()
+const int Dice::getDiceValue() const
 {
 	return dice;
 }
