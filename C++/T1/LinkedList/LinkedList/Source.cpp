@@ -128,20 +128,28 @@ public:
 		{
 			return;
 		}
-
 		Node<T>* temp = mHead;
-		if (mHead != nullptr)
+		Node<T>* cur = mHead;
+		for (int i = 0; cur != nullptr; i++)
 		{
-			for (int i = 0; i < nIndex; i++)
+			if (i == nIndex)
 			{
-				temp = temp->mNext;
-
-				if (i == nIndex)
+				if (nIndex == 0)
 				{
-					mHead->mNext = temp;
+					mHead = mHead->mNext;
+				}
+				else
+				{
+					temp->mNext = cur->mNext;
+					delete cur;
 				}
 			}
+			else
+			{
+				cur = cur->mNext;
+			}
 		}
+
 		delete temp;
 	}
 
