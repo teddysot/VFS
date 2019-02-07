@@ -34,10 +34,10 @@ template<typename T>
 class LinkedList
 {
 public:
-	LinkedList() :mHead(nullptr), mTail(nullptr) 
+	LinkedList() :mHead(nullptr), mTail(nullptr)
 	{}
 
-	void AddAtHead(T* pData) 
+	void AddAtHead(T* pData)
 	{
 		Node<T>* newNode = new Node<T>();
 		newNode->nData = pData;
@@ -54,7 +54,7 @@ public:
 		}
 	}
 
-	void AddAtTail(T* pData) 
+	void AddAtTail(T* pData)
 	{
 		Node<T>* newNode = new Node<T>();
 		newNode->nData = pData;
@@ -72,17 +72,17 @@ public:
 		}
 	}
 
-	T* GetHead() 
+	T* GetHead()
 	{
 		return mHead->nData;
 	}
 
-	T* GetTail() 
+	T* GetTail()
 	{
 		return mTail->nData;
 	}
 
-	int GetSize() 
+	int GetSize()
 	{
 		int count = 0;
 		if (mHead == nullptr)
@@ -102,10 +102,11 @@ public:
 		return count;
 	}
 
-	T* GetAt(int nIndex) 
+	T* GetAt(int nIndex)
 	{
 		Node<T>* pNode = mHead;
 
+		// if index = 0 return first index
 		if (nIndex == 0)
 		{
 			return pNode->nData;
@@ -124,37 +125,44 @@ public:
 
 	void RemoveAt(int nIndex)
 	{
+		// If LinkedList is empty
 		if (mHead == nullptr)
 		{
 			return;
 		}
-		Node<T>* temp = mHead;
-		Node<T>* cur = mHead;
-		for (int i = 0; cur != nullptr; i++)
+
+		// If index is 0
+		if (nIndex == 0)
 		{
-			if (i == nIndex)
-			{
-				if (nIndex == 0)
-				{
-					mHead = mHead->mNext;
-				}
-				else
-				{
-					temp->mNext = cur->mNext;
-					delete cur;
-				}
-			}
-			else
-			{
-				cur = cur->mNext;
-			}
+			mHead = mHead->mNext;
+			return;
 		}
 
-		delete temp;
+		Node<T>* temp = mHead;
+
+		// Loop to the index node
+		for (int i = 1; temp != nullptr && i < nIndex - 1; i++)
+		{
+			temp = temp->mNext;
+		}
+
+		// if it is the last node
+		if (temp == nullptr || temp->mNext == nullptr)
+		{
+			mTail = temp;
+			return;
+		}
+
+		Node<T>* next = temp->mNext->mNext;
+
+		temp->mNext = next;
+
+		mHead = temp;
 	}
 
-	bool Remove(T* pData) 
+	bool Remove(T* pData)
 	{
+		// If LinkedList is empty
 		if (mHead == nullptr)
 		{
 			return false;
@@ -163,6 +171,7 @@ public:
 		Node<T>* temp = mHead;
 		while (mHead != nullptr)
 		{
+			// Loop to the match nData
 			if (mHead->nData == pData)
 			{
 				Node<T>* pNode = temp->mNext;
@@ -175,10 +184,11 @@ public:
 			mHead = mHead->mNext;
 		}
 
+		// If there is no match nData
 		return false;
 	}
 
-	LinkedList<T>* Clone() 
+	LinkedList<T>* Clone()
 	{
 		LinkedList<T>* temp = new LinkedList<T>();
 		Node<T>* cur = mHead;
@@ -247,6 +257,7 @@ private:
 
 void main()
 {
+	// Test code
 	LinkedList<int> ll;
 	LinkedList<int>* ll2;
 
@@ -265,7 +276,8 @@ void main()
 	ll.AddAtTail(&data6);
 
 	ll.remove(&data1);
-	ll.RemoveAt(1);
+
+	ll.RemoveAt(0);
 
 	ll2 = ll.Clone();
 

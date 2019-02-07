@@ -13,22 +13,18 @@ namespace Calculator
             while(repeat)
             {
                 // Prompt an input for first number
-                input = inputNumber("First Number: ");
+                Console.Write("First Number: ");
+                input = inputNumber();
 
                 // Check is an input is a float
-                input = checkFloat("First Number: ", input);
-
-                // Convert input to float
-                num1 = float.Parse(input);
+                num1 = checkFloat(input);
 
                 // Prompt an input for second number
-                input = inputNumber("Second Number: ");
+                Console.Write("Second Number: ");
+                input = inputNumber();
 
                 // Check is an input is a float
-                input = checkFloat("Second Number: ", input);
-
-                // Convert input to float
-                num2 = float.Parse(input);
+                num2 = checkFloat(input);
 
                 // Prompt an input for operator
                 inputOperator(num1, num2);
@@ -37,31 +33,32 @@ namespace Calculator
                 repeat = repeatCalculation();
             }
 
+            Console.WriteLine("Press any key to exit...");
             Console.ReadLine();
         }
 
         static bool repeatCalculation()
         {
-            string aCal = "";
+            int aCal = 0;
             
             Console.WriteLine("Do you want to do another calculation?");
             Console.WriteLine("1.Yes\n2.No");
-            aCal = inputNumber("Choose: ");
-            aCal = checkInt("Choose: ", aCal);
+            Console.Write("Choose: ");
+            aCal = checkInt(inputNumber());
 
             // Check if user inputed an invalid input
-            if (aCal != "1" && aCal != "2")
+            if (aCal != 1 && aCal != 2)
             {
                 // Print out error
                 Console.WriteLine("[Invalid Input] Unknown option");
 
                 Console.WriteLine("Do you want to do another calculation?");
                 Console.WriteLine("1.Yes\n2.No");
-                aCal = inputNumber("Choose: ");
-                aCal = checkInt("Choose: ", aCal);
+                Console.Write("Choose: ");
+                aCal = checkInt(inputNumber());
             }
 
-            if (aCal == "1")
+            if (aCal == 1)
             {
                 return true;
             }
@@ -112,7 +109,7 @@ namespace Calculator
             }
         }
 
-        static string checkInt(string n, string input)
+        static int checkInt(string input)
         {
             int temp = -1;
             while (!int.TryParse(input, out temp))
@@ -120,13 +117,14 @@ namespace Calculator
                 // Print out error
                 Console.WriteLine("[Invalid Input] Not a number");
 
-                input = inputNumber(n);
+                Console.Write("Choose: ");
+                input = inputNumber();
             }
 
-            return input;
+            return temp;
         }
 
-        static string checkFloat(string n, string input)
+        static float checkFloat(string input)
         {
             float temp = -1.0f;
             while (!float.TryParse(input, out temp))
@@ -134,17 +132,16 @@ namespace Calculator
                 // Print out error
                 Console.WriteLine("[Invalid Input] Not a number");
 
-                input = inputNumber(n);
+                Console.Write("Enter again: ");
+                input = inputNumber();
             }
 
-            return input;
+            return temp;
         }
 
-        static string inputNumber(string n)
+        static string inputNumber()
         {
-            Console.Write("{0}", n);
             return Console.ReadLine();
-
         }
 
         // Print Result function
