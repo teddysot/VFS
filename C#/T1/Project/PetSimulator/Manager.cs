@@ -6,8 +6,10 @@ namespace PetSimulator
 {
     class Manager
     {
+        // Counting Day of a game
         private static int dayCount = 1;
 
+        // Day in a week
         enum Days
         {
             Monday,
@@ -19,6 +21,7 @@ namespace PetSimulator
             Sunday
         }
 
+        // Keep track of a day
         private static int i = 0;
         private static int count = 0;
         public static void checkDay()
@@ -33,6 +36,12 @@ namespace PetSimulator
                 count = 0;
             }
 
+            if (i > 6)
+            {
+                i = 0;
+            }
+
+            // Print out Day Count
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("[GAME] ");
             Console.ResetColor();
@@ -41,6 +50,7 @@ namespace PetSimulator
             Console.Write("{0}\n", dayCount);
             Console.ResetColor();
 
+            // Print our What day is it
             Days days = (Days)i;
             switch (days)
             {
