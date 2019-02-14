@@ -1,12 +1,19 @@
 ﻿using System;
 
-namespace W5_Exercise2
+namespace PetSimulator
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Pet p = new Pet("Aragon");
+            // Start the Game
+            Game.Start();
+
+            // Game Loop
+            Game.Update();
+
+            // Terminate the Game
+            Game.Terminate();
         }
     }
 }

@@ -2,134 +2,152 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace W5_Exercise2
+namespace PetSimulator
 {
     class Pet
     {
-        private string Name;
-        private float Hunger = 100.0f;
-        private float Thirst = 100.0f;
-        private float Sleepiness = 100.0f;
-        private float Happiness = 100.0f;
+        public string petName { get; set; }
+        public float hunger { get; private set; }
+        public float thirst { get; private set; }
+        public float sleepiness { get; private set; }
+        public float happiness { get; private set; }
 
         public Pet()
         {
-            Name = "DEFAULT NAME";
+            petName = "DEFAULT NAME";
+            hunger = 10.0f;
+            thirst = 100.0f;
+            sleepiness = 100.0f;
+            happiness = 100.0f;
         }
 
-        public Pet(string pName)
+        public void Eat(float amount) // In Grams
         {
-            Name = pName;
+            hunger += amount;
+
+            checkMembers();
         }
 
-        public void Eat(float amount)
+        public void Walk(float distance) // In Meters
         {
-            Hunger -= amount;
-            if(Hunger < 0)
+            hunger -= (distance / 80);
+            thirst -= (distance / 50);
+            sleepiness -= (distance / 80);
+            happiness -= (distance / 100);
+
+            checkMembers();
+        }
+
+        public void Sleep(float amount) // In Hours
+        {
+            hunger -= (amount * 5);
+            thirst -= (amount * 3);
+            sleepiness += (amount * 10);
+            happiness -= (amount * 10);
+
+            checkMembers();
+        }
+
+        public void Playing(float amount) // In Hours
+        {
+            hunger -= (amount * 8);
+            thirst -= (amount * 5);
+            sleepiness -= (amount * 6);
+            happiness += (amount * 5);
+
+            checkMembers();
+        }
+
+        public void WatchMovie(float amount) // In Hours
+        {
+            hunger -= (amount * 2);
+            thirst -= (amount * 2);
+            sleepiness -= (amount * 3);
+            happiness += (amount * 10);
+
+            checkMembers();
+        }
+
+        public void Toilet()
+        {
+            hunger -= 5;
+            thirst -= 5;
+            sleepiness -= 5;
+            happiness += 5;
+
+            checkMembers();
+        }
+
+        public void Reset()
+        {
+            hunger = 100.0f;
+            thirst = 100.0f;
+            sleepiness = 100.0f;
+            happiness = 100.0f;
+        }
+
+        private void checkMembers()
+        {
+            if (hunger > 100.0f)
             {
-                Hunger = 0;
+                hunger = 100.0f;
+            }
+
+            if (hunger < 0.0f)
+            {
+                hunger = 0.0f;
+            }
+
+            if(thirst > 100.0f)
+            {
+                thirst = 100.0f;
+            }
+
+            if(thirst < 0.0f)
+            {
+                thirst = 0.0f;
+            }
+
+            if (sleepiness > 100.0f)
+            {
+                sleepiness = 100.0f;
+            }
+
+            if (sleepiness < 0.0f)
+            {
+                sleepiness = 0.0f;
+            }
+
+            if (happiness > 100.0f)
+            {
+                happiness = 100.0f;
+            }
+
+            if (happiness < 0.0f)
+            {
+                happiness = 0.0f;
             }
         }
 
-        public void Walk(float distance)
+        public bool checkHealth()
         {
-            Hunger = (distance / 100) - Hunger;
-            Thirst = (distance / 200) - Thirst;
-            Sleepiness = (distance / 200) - Sleepiness;
-            Happiness = (distance / 200) - Happiness;
-        }
-
-        public void Sleep(float amount)
-        {
-            Hunger = (amount * 5) - Hunger;
-            Thirst = (amount * 3) - Thirst;
-            Sleepiness = (amount * 10) + Sleepiness;
-            Happiness = (amount * 10) - Happiness;
-        }
-
-        public void WatchMovie(float amount)
-        {
-
-        }
-
-        public void Dropping()
-        {
-
-        }
-
-        public void RollOver(float pHunger, float pSleep, float pHappy)
-        {
-            Hunger += pHunger;
-            Sleepiness += pSleep;
-            Happiness += pHappy;
-
-            if(Hunger > 100.0f)
+            if(hunger == 0.0f || thirst == 0.0f || sleepiness == 0.0f || happiness == 0.0f)
             {
-                Hunger = 100.0f;
+                return false;
             }
-
-            if (Sleepiness > 100.0f)
+            else if(hunger < 10.0f || thirst < 10.0f || sleepiness < 10.0f || happiness < 10.0f)
             {
-                Sleepiness = 100.0f;
-            }
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\n[{0}] ", petName);
+                Console.ResetColor();
+                Console.Write("I'm dying\n");
 
-            if (Happiness > 100.0f)
+                return true;
+            }
+            else
             {
-                Happiness = 100.0f;
+                return true;
             }
-        }
-
-        // Setter Functions
-        public void setName(string pName)
-        {
-            Name = pName;
-        }
-
-        public void setHunger(float pHunger)
-        {
-            Hunger = pHunger;
-        }
-
-        public void setThirst(float pThirst)
-        {
-            Thirst = pThirst;
-        }
-
-        public void setSleepiness(float pSleep)
-        {
-            Sleepiness = pSleep;
-        }
-
-        public void setHappiness(float pHappy)
-        {
-            Happiness = pHappy;
-        }
-
-
-        // Getter Functions
-        public string getName()
-        {
-            return Name;
-        }
-
-        public float getHunger()
-        {
-            return Hunger;
-        }
-
-        public float getThirst()
-        {
-            return Thirst;
-        }
-
-        public float getSleepiness()
-        {
-            return Sleepiness;
-        }
-
-        public float getHappiness()
-        {
-            return Happiness;
         }
     }
 }
