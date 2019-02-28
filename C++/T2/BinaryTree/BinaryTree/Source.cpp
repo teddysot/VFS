@@ -31,14 +31,27 @@ public:
 		_remove(mRoot, data);
 	}
 
-	T findMin(shared_ptr<Node<T>>& root)
+	shared_ptr<Node<T>>& findMin(shared_ptr<Node<T>>& root)
 	{
-		while (root->mLeft)
+		if (root->mLeft == nullptr && root->mRight == nullptr)
 		{
-			root = root->mLeft;
+			return root;
 		}
-
-		return root->mData;
+		else if (root->mLeft != nullptr)
+		{
+			if (root->mLeft->mLeft != nullptr)
+			{
+				findMin(root->mLeft);
+			}
+			else
+			{
+				return root->mLeft;
+			}
+		}
+		else if (root->mLeft == nullptr)
+		{
+			findMin(root->mRight);
+		}
 	}
 
 	void printPreOrder()
@@ -100,7 +113,81 @@ private:
 			// Remove root
 			if (root->mData == data)
 			{
-				// 
+				if (root->mLeft == nullptr && root->mRight == nullptr)
+				{
+					root = nullptr;
+				}
+				else
+				{
+					// Find min right and left most
+					shared_ptr<Node<T>> temp = findMin(root->mRight);
+					root->mData = temp->mData;
+					_remove(root->mRight, temp->mData);
+				}
+				cout << "[REMOVE] " << data << endl;
+				return;
+			}
+
+			// Remove left node
+			if (data < root->mData)
+			{
+				if (data == root->mLeft->mData)
+				{
+					if (root->mLeft->mLeft != nullptr && root->mLeft->mRight == nullptr)
+					{
+						root = root->mLeft;
+					}
+					else if (root->mLeft->mLeft == nullptr && root->mLeft->mRight != nullptr)
+					{
+						root = root->mRight;
+					}
+					else if (root->mLeft->mLeft == nullptr && root->mLeft->mRight == nullptr)
+					{
+						root->mLeft = nullptr;
+					}
+					else
+					{
+						shared_ptr<Node<T>> temp = findMin(root->mLeft->mRight);
+						root->mLeft->mData = temp->mData;
+						_remove(root->mLeft->mRight, temp->mData);
+					}
+					cout << "[REMOVE] " << data << endl;
+				}
+				else
+				{
+					_remove(root->mLeft, data);
+				}
+			}
+
+			// Remove Right node
+			else if (data > root->mData)
+			{
+				if (data == root->mRight->mData)
+				{
+					if (root->mRight->mLeft != nullptr && root->mRight->mRight == nullptr)
+					{
+						root = root->mLeft;
+					}
+					else if (root->mRight->mLeft == nullptr && root->mRight->mRight != nullptr)
+					{
+						root = root->mRight;
+					}
+					else if (root->mRight->mLeft == nullptr && root->mRight->mRight == nullptr)
+					{
+						root->mRight = nullptr;
+					}
+					else
+					{
+						shared_ptr<Node<T>> temp = findMin(root->mRight->mRight);
+						root->mRight->mData = temp->mData;
+						_remove(root->mRight->mRight, temp->mData);
+					}
+					cout << "[REMOVE] " << data << endl;
+				}
+				else
+				{
+					_remove(root->mLeft, data);
+				}
 			}
 		}
 		else
@@ -111,6 +198,7 @@ private:
 
 	void _add(shared_ptr<Node<T>>& root, T data)
 	{
+		// If root is empty
 		if (root == nullptr)
 		{
 			root = make_shared<Node<T>>();
@@ -118,7 +206,8 @@ private:
 			return;
 		}
 
-		// find position in tree where to add
+		// Find position in tree where to add
+		// Create left node
 		if (data < root->mData)
 		{
 			if (root->mLeft == nullptr)
@@ -130,6 +219,7 @@ private:
 				_add(root->mLeft, data);
 			}
 		}
+		// Create right node
 		else
 		{
 			if (root->mRight == nullptr)
@@ -171,6 +261,7 @@ int main()
 	tree.add(8);
 	tree.add(1);
 	tree.add(5);
+	tree.add(10);
 
 	cout << "Pre Order: ";
 	tree.printPreOrder();
@@ -185,6 +276,32 @@ int main()
 	cout << endl;
 
 	tree.remove(6);
+
+	cout << "Pre Order: ";
+	tree.printPreOrder();
+	cout << endl;
+
+	cout << "In Order: ";
+	tree.printInOrder();
+	cout << endl;
+
+	cout << "Post Order: ";
+	tree.printPostOrder();
+	cout << endl;
+
+	tree.remove(4);
+
+	cout << "Pre Order: ";
+	tree.printPreOrder();
+	cout << endl;
+
+	cout << "In Order: ";
+	tree.printInOrder();
+	cout << endl;
+
+	cout << "Post Order: ";
+	tree.printPostOrder();
+	cout << endl;
 
 	return 0;
 }
