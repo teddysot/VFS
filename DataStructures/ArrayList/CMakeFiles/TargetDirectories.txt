@@ -1,3 +1,0 @@
-C:/Users/pg15teddy/Documents/VFS/DataStructures/ArrayList/build/CMakeFiles/Lesson2List.dir
-C:/Users/pg15teddy/Documents/VFS/DataStructures/ArrayList/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/pg15teddy/Documents/VFS/DataStructures/ArrayList/build/CMakeFiles/ZERO_CHECK.dir
