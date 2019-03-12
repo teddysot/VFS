@@ -1,0 +1,116 @@
+- ListStack ----------------------
+pop: 0
+[0] -1
+[1] 1
+[2] -2
+[3] 2
+[4] -3
+[5] 3
+[6] -4
+[7] 4
+[8] -5
+[9] 2
+pop: 2
+pop: -5
+pop: 4
+pop: -4
+pop: 3
+pop: -3
+pop: 2
+pop: -2
+pop: 1
+pop: -1
+
+- ListQueue ----------------------
+dequeue: 0
+[0] -1
+[1] 1
+[2] -2
+[3] 2
+[4] -3
+[5] 3
+[6] -4
+[7] 4
+[8] -5
+[9] 2
+dequeue: -1
+dequeue: 1
+dequeue: -2
+dequeue: 2
+dequeue: -3
+dequeue: 3
+dequeue: -4
+dequeue: 4
+dequeue: -5
+dequeue: 2
+
+- ListPriorityQueue ----------------------
+dequeue: 0
+[0] 4
+[1] 3
+[2] 2
+[3] 2
+[4] 1
+[5] -1
+[6] -2
+[7] -3
+[8] -4
+[9] -5
+dequeue: 4
+dequeue: 3
+dequeue: 2
+dequeue: 2
+dequeue: 1
+dequeue: -1
+dequeue: -2
+dequeue: -3
+dequeue: -4
+dequeue: -5
+
+- ListDeque ----------------------
+pop front: 0
+[0] -5
+[1] -4
+[2] -3
+[3] -2
+[4] -1
+[5] 1
+[6] 2
+[7] 3
+[8] 4
+[9] 2
+pop front: -5
+pop back: 2
+pop front: -4
+pop back: 4
+pop front: -3
+pop back: 3
+pop front: -2
+pop back: 2
+pop front: -1
+pop back: 1
+
+- CircularDeque --------------------
+pop front: 0
+[0] -5
+[1] -4
+[2] -3
+[3] -2
+[4] -1
+[5] 1
+[6] 2
+[7] 3
+[8] 4
+[9] 2
+pop front: -5
+pop back: 2
+pop front: -4
+pop back: 4
+pop front: -3
+pop back: 3
+pop front: -2
+pop back: 2
+pop front: -1
+pop back: 1
+
+Press any key to continue . . .
