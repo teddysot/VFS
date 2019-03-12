@@ -43,7 +43,6 @@ public:
 	{
 		// Delete array.
 		delete[] mArray;
-		delete mArray;
 	}
 
 	//------------------------------------------------------------------
@@ -103,15 +102,14 @@ public:
 			return false;
 		}
 
+		// Decrement size.
+		mSize--;
+
 		// Start at index and move everybody up one.
 		for (uint32_t i = index; i < mSize; i++)
 		{
 			mArray[i] = mArray[i + 1];
 		}
-		mArray[mSize] = NULL;
-
-		// Decrement size.
-		mSize--;
 
 		return true;
 	}
