@@ -33,21 +33,31 @@ vec3 vec3::operator+ (vec3 b)
 {
 	/** Your Code Here **/
 
-	return vec3(this->mx + b.mx, this->my + b.my, this->mz + b.mz);
+	return vec3(this->X() + b.X(), this->Y() + b.Y(), this->Z() + b.Z());
 }
 
 vec3 vec3::operator- (vec3 b)
 {
 	/** Your Code Here **/
 
-	return vec3(this->mx - b.mx, this->my - b.my, this->mz - b.mz);
+	return vec3(this->X() - b.X(), this->Y() - b.Y(), this->Z() - b.Z());
 }
 
 float vec3::dot(vec3 b)
 {
 	/** Your Code Here **/
 
-	return (mx * b.mx) + (my * b.my) + (mz * b.mz);;
+	return (mx * b.X()) + (my * b.X()) + (mz * b.X());;
+}
+
+float vec3::magnitude() const
+{
+	return sqrt((mx * mx) + (my * my) + (mz * mz));;
+}
+
+vec3 vec3::normalized() const
+{
+	return vec3(mx / magnitude(), my / magnitude(), mz / magnitude());
 }
 
 // Determine if posB is visible from posA,
@@ -57,6 +67,12 @@ bool isWithinVisionCone(vec3 posA, vec3 dirA, vec3 posB, float coneHalfAngle)
 {
 	/** Your Code Here **/
 
+	vec3 result = posA - posB;
+
+	if (result.dot(dirA) <= cos(coneHalfAngle))
+	{
+		return true;
+	}
 
 	return false;
 }

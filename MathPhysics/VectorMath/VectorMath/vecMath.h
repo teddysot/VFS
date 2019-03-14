@@ -46,6 +46,8 @@ public:
 	vec3 operator- (vec3 b);
 	
 	float dot(vec3 b);
+	float magnitude() const;
+	vec3 normalized() const;
 
 	friend std::ostream& operator<< (std::ostream& stream, const vec3& vec)
 	{
