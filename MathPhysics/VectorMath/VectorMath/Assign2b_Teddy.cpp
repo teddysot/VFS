@@ -33,14 +33,14 @@ vec3 vec3::operator+ (vec3 b)
 {
 	/** Your Code Here **/
 
-	return vec3(this->X() + b.X(), this->Y() + b.Y(), this->Z() + b.Z());
+	return vec3(this->mx + b.X(), this->my + b.Y(), this->mz + b.Z());
 }
 
 vec3 vec3::operator- (vec3 b)
 {
 	/** Your Code Here **/
 
-	return vec3(this->X() - b.X(), this->Y() - b.Y(), this->Z() - b.Z());
+	return vec3(this->mx - b.X(), this->my - b.Y(), this->mz - b.Z());
 }
 
 float vec3::dot(vec3 b)
@@ -67,9 +67,10 @@ bool isWithinVisionCone(vec3 posA, vec3 dirA, vec3 posB, float coneHalfAngle)
 {
 	/** Your Code Here **/
 
-	vec3 result = posA - posB;
+	vec3 result = posB - posA;
+	float cosA = result.dot(dirA) / (result.magnitude() * dirA.magnitude());
 
-	if (result.dot(dirA) <= cos(coneHalfAngle))
+	if (acos(cosA) < coneHalfAngle * 3.14 / 180)
 	{
 		return true;
 	}
