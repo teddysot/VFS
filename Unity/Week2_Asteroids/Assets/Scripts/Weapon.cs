@@ -15,7 +15,12 @@ public class Weapon : MonoBehaviour
     // Try firing the weapon
     public void TryFire()
     {
-        Fire();
+        // Check if weapon can fire based on cooldown
+        if (Time.timeSinceLevelLoad >= _lastFireTime + _cooldown)
+        {
+            _lastFireTime = Time.timeSinceLevelLoad;
+            Fire();
+        }
     }
 
     // Actually fire the weapon

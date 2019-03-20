@@ -5,11 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private float _velocity = 10.0f;        // Initial velocity
+    protected float _velocity = 10.0f;        // Initial velocity
     [SerializeField]
     private float _lifeTime = 5.0f;        // Total life time
 
-    private Rigidbody _rigidbody;   // Rigidbody of the object
+    protected Rigidbody _rigidbody;   // Rigidbody of the object
 
     private void Awake()
     {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3449762897655535732}
   - component: {fileID: 7430269107881079159}
   - component: {fileID: 7536386694738371249}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Asteroid03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 5
+  _deathParticles: {fileID: 5751437048829275001, guid: 20d918681327c104fa22123ba7b812bc,
+    type: 3}
+  _deathParticlesDuration: 1
 --- !u!114 &7536386694738371249
 MonoBehaviour:
   m_ObjectHideFlags: 0

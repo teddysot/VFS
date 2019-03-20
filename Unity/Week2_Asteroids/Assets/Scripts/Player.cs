@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     private float _turnSpeed = 10.0f;       // Turn acceleration of the ship
 
     private Rigidbody _rigidbody;
-    private Weapon _weapon;
+    private Weapon[] _weapons;
     private Vector2 _input;
+    private int _currentWeaponIndex;
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
         // Get the attached weapon
-        _weapon = GetComponentInChildren<Weapon>();
+        _weapons = GetComponentsInChildren<Weapon>();
     }
 
     private void Update()
@@ -27,10 +28,20 @@ public class Player : MonoBehaviour
         // Get player inputs
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        // Try firing the weapon
-        if(Input.GetButtonDown("Fire1"))
+        // Change weapons
+        if (Input.GetButtonDown("ChangeWeapon"))
         {
-            _weapon.TryFire();
+            _currentWeaponIndex++;
+            if (_currentWeaponIndex >= _weapons.Length)
+            {
+                _currentWeaponIndex = 0;
+            }
+        }
+
+        // Try firing the weapon
+        if (Input.GetButton("Fire1"))
+        {
+            _weapons[_currentWeaponIndex].TryFire();
         }
     }
 
