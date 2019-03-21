@@ -48,13 +48,15 @@ public:
 
 private:
 
-	const unsigned int mAttack = 0;
-	const unsigned int mJump = 1;
-	const unsigned int mDuck = 2;
-	const unsigned int mForward = 3;
-	const unsigned int mBack = 4;
-	const unsigned int mUse = 5;
-	const unsigned int mCancel = 6;
+	static const unsigned int mAttack = (1 << 0);
+	static const unsigned int mJump = (1 << 1);
+	static const unsigned int mDuck = (1 << 2);
+	static const unsigned int mForward = (1 << 3);
+	static const unsigned int mBack = (1 << 4);
+	static const unsigned int mUse = (1 << 5);
+	static const unsigned int mCancel = (1 << 6);
+
+	unsigned int mInputState;
 };
 
 //=============================================================
@@ -70,7 +72,7 @@ InputState::~InputState()
 
 bool InputState::IsAttack() const
 {
-	if (mAttack == 0001)
+	if ((mInputState & mAttack) != 0)
 	{
 		return true;
 	}
@@ -129,26 +131,13 @@ private:
 };
 
 //=============================================================
-
-unsigned int bitWisePowerTwo(unsigned int a)
-{
-	return (1 << a);
-}
 //=============================================================
 
 void InputManager::Update()
 {
-	/*mState.mAttack = IsButtonDown( SDL_SCANCODE_LCTRL );
-	mState.mJump = IsButtonDown( SDL_SCANCODE_SPACE );
-	mState.mDuck = IsButtonDown( SDL_SCANCODE_LSHIFT );
-	mState.mForward = IsButtonDown( SDL_SCANCODE_UP );
-	mState.mBack = IsButtonDown( SDL_SCANCODE_DOWN );
-	mState.mUse = IsButtonDown( SDL_SCANCODE_E );
-	mState.mCancel = IsButtonDown( SDL_SCANCODE_BACKSPACE );*/
-
 	if (IsButtonDown(SDL_SCANCODE_LCTRL))
 	{
-		if (bitWisePowerTwo(mState.mAttack) == 0001)
+		if (mState.mInputState |= InputState::mAttack)
 		{
 			OutputDebugStringA("Attack!");
 		}
@@ -156,7 +145,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_SPACE))
 	{
-		if (bitWisePowerTwo(mState.mJump) == 0010)
+		if (mState.mInputState |= InputState::mJump)
 		{
 			OutputDebugStringA("Jump!");
 		}
@@ -164,7 +153,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_LSHIFT))
 	{
-		if (bitWisePowerTwo(mState.mDuck) == 0010)
+		if (mState.mInputState |= InputState::mDuck)
 		{
 			OutputDebugStringA("Duck!");
 		}
@@ -172,7 +161,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_UP))
 	{
-		if (bitWisePowerTwo(mState.mForward) == 0100)
+		if (mState.mInputState |= InputState::mForward)
 		{
 			OutputDebugStringA("Forward!");
 		}
@@ -180,7 +169,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_DOWN))
 	{
-		if (bitWisePowerTwo(mState.mBack) == 01000)
+		if (mState.mInputState |= InputState::mBack)
 		{
 			OutputDebugStringA("Back!");
 		}
@@ -188,7 +177,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_E))
 	{
-		if (bitWisePowerTwo(mState.mUse) == 010000)
+		if (mState.mInputState |= InputState::mUse)
 		{
 			OutputDebugStringA("Use!");
 		}
@@ -196,7 +185,7 @@ void InputManager::Update()
 
 	if (IsButtonDown(SDL_SCANCODE_BACKSPACE))
 	{
-		if (bitWisePowerTwo(mState.mCancel) == 0100000)
+		if (mState.mInputState |= InputState::mCancel)
 		{
 			OutputDebugStringA("Cancel!");
 		}
@@ -254,6 +243,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	SDL_SetRenderDrawColor( pRenderer, 0, 0, 0, 255 );
 	SDL_RenderClear( pRenderer );
+
+	SDL_Rect r;
+	r.x = 50;
+	r.y = 50;
+	r.w = 50;
+	r.h = 50;
+	
+	SDL_SetRenderDrawColor(pRenderer, 0, 0, 255, 255);
+
+	// Render rect
+	SDL_RenderFillRect(pRenderer, &r);
 
 	SDL_RenderPresent( pRenderer );
 
