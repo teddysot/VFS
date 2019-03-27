@@ -138,7 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c569dd7eb7390ff40b9401225d70bf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 5
+  _currentHealth: 1
+  _scoreValue: 100
   _deathParticles: {fileID: 5751437048829275001, guid: 20d918681327c104fa22123ba7b812bc,
     type: 3}
   _deathParticlesDuration: 1

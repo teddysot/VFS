@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstJourney"></activity>
+        <activity android:name=".FifthJourney"></activity>
+        <activity android:name=".FourthJourney" />
+        <activity android:name=".ThirdJourney" />
+        <activity android:name=".SecondJourney" />
+        <activity android:name=".EndJourney" />
+        <activity android:name=".FirstJourney" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

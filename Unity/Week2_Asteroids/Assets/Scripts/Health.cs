@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int _currentHealth = 1;                     // Current/Initial health
-    private int _maxHealth;                             // Max Health
+    private int _currentHealth = 1;     // Current/Initial health
+    private int _maxHealth;             // Max Health
+
+    [SerializeField]
+    private int _scoreValue = 0;        // Score       
 
     [SerializeField]
     private ParticleSystem _deathParticles;
@@ -17,6 +21,10 @@ public class Health : MonoBehaviour
 
     // Make current health percentage visible
     public float HealthPercentage => (float)_currentHealth / _maxHealth;
+
+    // On death unity event
+    [SerializeField]
+    private UnityEvent OnDeath;
 
     private void Start()
     {
@@ -44,6 +52,12 @@ public class Health : MonoBehaviour
             // This will instantiate and destroy particles simultaneously
             Destroy(Instantiate(_deathParticles, transform.position, transform.rotation), _deathParticlesDuration);
         }
+
+        // Add score on death
+        Score.Instance.AddScore(_scoreValue);
+
+        // Call OnDeath event
+        OnDeath.Invoke();
 
         // Destroy the gameobject
         Destroy(gameObject);
