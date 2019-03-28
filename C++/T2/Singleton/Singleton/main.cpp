@@ -4,25 +4,20 @@
 
 using namespace std;
 
-class Animal : public Singleton<Animal>
+class Dog : public Singleton<Dog>
 {
 public:
 
-	virtual void Walk() = 0;
-
-	Animal() {}
-	~Animal() {}
-};
-
-class Dog : public Animal
-{
-	virtual void Walk()
+	void Walk()
 	{
 		cout << "Dog walk" << endl;
 	}
+
 	Dog() {}
 	~Dog() {}
 };
+
+Dog* Singleton<Dog>::mInstance = nullptr;
 
 int main()
 {
