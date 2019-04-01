@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\build\CMakeFiles\12f72843d1491f8d10c57e5a7ed7ac0a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6DC7E688-562F-3FCD-A148-4A56D8A95FEF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

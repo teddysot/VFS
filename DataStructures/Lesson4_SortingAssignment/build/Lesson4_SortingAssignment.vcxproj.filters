@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\adt\deque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\adt\list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\adt\queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\adt\stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\arraylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\circulardeque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\linkedlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\listdeque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\listpriorityqueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\listqueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\ds\liststack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\src\randomints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pg15teddy\Documents\VFS\DataStructures\Lesson4_SortingAssignment\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{ED98BE17-8367-3CD8-AC88-0A2E6C004DA3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{67ECAD0C-EC27-3CE8-ACAA-4E06A3CB965A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
