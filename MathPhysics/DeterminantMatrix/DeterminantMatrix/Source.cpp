@@ -26,7 +26,7 @@ struct Vector2
 	{
 		Vector2 result =
 		{ (v1.x * v2.y)
-		, (-v1.y * v2.x) };
+		, -(v1.y * v2.x) };
 
 		return result;
 	}
@@ -108,17 +108,18 @@ int main()
 
 	printf("Matrix2 Determinant: %.1f\n", Matrix3::Determinant(m3));
 
-	Vector2 v1 = { 1, 3 };
-	Vector2 v2 = { -9, 0 };
+	Vector2 v4 = { 1, 3 };
+	Vector2 v5 = { -9, 0 };
 
-	Vector2 crossResult = Vector2::Cross(v1, v2);
+	Vector2 crossResult = Vector2::Cross(v4, v5);
+	cout << Vector2::Magnitude(v5) << endl;
 	printf("Vector3 Cross Product: ( %.1f, %.1f )\n", crossResult.x, crossResult.y);
 
 	Vector3 v1 = { 1, 3, -4 };
 	Vector3 v2 = { -9, 0, -4 };
 
-	Vector3 crossResult = Vector3::Cross(v1, v2);
-	printf("Vector3 Cross Product: ( %.1f, %.1f, %.1f )\n", crossResult.x, crossResult.y, crossResult.z);
+	Vector3 crossResult2 = Vector3::Cross(v1, v2);
+	printf("Vector3 Cross Product: ( %.1f, %.1f, %.1f )\n", crossResult2.x, crossResult2.y, crossResult2.z);
 
 	return 0;
 }
