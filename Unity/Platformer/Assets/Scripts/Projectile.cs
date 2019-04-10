@@ -10,6 +10,9 @@ public class Projectile : MonoBehaviour
     // Initial velocity
     [SerializeField] private float _velocity = 10.0f;
 
+    // Damage dealt
+    [SerializeField] private int _damage = 1;
+
     // Physics components
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
@@ -61,5 +64,8 @@ public class Projectile : MonoBehaviour
 
         // Rotate in the direction of our velocity
         transform.rotation = Quaternion.LookRotation(Vector3.forward, _currentVelocity);
+
+        // Damage anything we hit
+        other.gameObject.GetComponent<Health>()?.Damage(_damage);
     }
 }
