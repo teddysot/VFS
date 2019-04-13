@@ -37,15 +37,18 @@ vec3 vec3::cross(vec3& other)
 bool isInsidePlayspace(vector<vec3> sensors, vec3 hmd)
 {
 	/* Your Code Here */
+	// Get vectors
 	vec3 a = hmd - sensors[0];
 	vec3 b = hmd - sensors[1];
 	vec3 c = hmd - sensors[2];
 	vec3 d = hmd - sensors[3];
 
+	// Get normals
 	vec3 result1 = a.cross(b);
 	vec3 result2 = b.cross(c);
 	vec3 result3 = c.cross(d);
 
+	// Compare if it on the same space
 	if (result1.Z() > 0.0f
 		&& result2.Z() > 0.0f
 		&& result3.Z() > 0.0f)
