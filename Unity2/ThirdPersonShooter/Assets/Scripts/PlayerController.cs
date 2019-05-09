@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Unit
 {
     [SerializeField] private int _PlayerScore;
     [SerializeField] private float _PlayerHealth;
@@ -14,21 +13,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] KeyCode _SprintKey = KeyCode.LeftShift;
     [SerializeField] Transform _CameraPivot;
 
-    private Animator _Animator;
-    private Rigidbody _RigidBody;
     private Transform _PlayerCamera;
     private float _SpeedMultiply;
     private float _XInput;
     private float _ZInput;
     private bool _JumpPressed;
 
-
-    private void Awake()
+    public override void UnitAwake()
     {
-        _Animator = GetComponent<Animator>();
-        _RigidBody = GetComponent<Rigidbody>();
         _PlayerCamera = GetComponentInChildren<Camera>().transform;
-        Cursor.visible = false;
     }
 
     private void Update()
@@ -79,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         if(_JumpPressed)
         {
-            _Animator.SetTrigger("Jump");
+            _anim.SetTrigger("Jump");
         }
     }
 
@@ -87,16 +80,16 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 newVelocity = new Vector3(_XInput, 0.0f, _ZInput) * _MoveSpeed * _SpeedMultiply;
         newVelocity = transform.TransformVector(newVelocity);
-        newVelocity.y = _JumpPressed ? _JumpSpeed : _RigidBody.velocity.y;
-        _RigidBody.velocity = newVelocity;
+        newVelocity.y = _JumpPressed ? _JumpSpeed : _rigidbody.velocity.y;
+        _rigidbody.velocity = newVelocity;
 
         _JumpPressed = false;
     }
 
     private void SetAnimValues()
     {
-        _Animator.SetFloat("Horizontal", _XInput);
-        _Animator.SetFloat("Vertical", _ZInput);
-        _Animator.SetFloat("SpeedMult", _SpeedMultiply);
+        _anim.SetFloat("Horizontal", _XInput);
+        _anim.SetFloat("Vertical", _ZInput);
+        _anim.SetFloat("SpeedMult", _SpeedMultiply);
     }
 }
