@@ -1,20 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : Unit
 {
-    [SerializeField] private int _PlayerScore;
-    [SerializeField] private float _PlayerHealth;
-    [SerializeField] private float _MoveSpeed = 5.0f;
-    [SerializeField] private float _SprintSpeedMultiply = 5.0f;
-    [SerializeField] private float _JumpSpeed = 12.0f;
-    [SerializeField] KeyCode _JumpKey = KeyCode.Space;
-    [SerializeField] KeyCode _SprintKey = KeyCode.LeftShift;
-    [SerializeField] Transform _CameraPivot;
+    [SerializeField]
+    private float _MoveSpeed = 5f;
+
+    [SerializeField]
+    private float _SprintSpeedMult = 5f;
+ 
+    [SerializeField]
+    private float _JumpSpeed = 12f;
+
+    [SerializeField]
+    private KeyCode _JumpKey = KeyCode.Space;
+
+    [SerializeField]
+    private KeyCode _SprintKey = KeyCode.LeftShift;
+
+    [SerializeField]
+    private Transform _CameraPivot;
 
     private Transform _PlayerCamera;
-    private float _SpeedMultiply;
+    private float _SpeedMult;
     private float _XInput;
     private float _ZInput;
     private bool _JumpPressed;
@@ -26,70 +33,82 @@ public class PlayerController : Unit
 
     private void Update()
     {
-        CursorVisible();
-        InputMovement();
-        UpdateRotations();
+        Cursor.lockState = CursorLockMode.Locked;
         UpdateCameraZoom();
+
+        if(IsAlive == false) return;
+
+        ReadMoveInputs();
+        SetAnimValues();
+        UpdateRotations();
+        ShootLasers();
+    }
+
+    private void ShootLasers()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            var ray = new Ray(_PlayerCamera.position, _PlayerCamera.forward);
+            if(Physics.Raycast(ray, out var hit))
+            {
+                if(CanUnitSee(hit.point, hit.transform))
+                {
+                    ShootLasersFromEyes(hit.point, hit.transform);
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        if(IsAlive == false) return;
+        
         ApplyMovePhysics();
-        SetAnimValues();
     }
 
-    private static void CursorVisible()
+    private void ApplyMovePhysics()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            Cursor.visible = !Cursor.visible;
-        }
+        var newVel = new Vector3(_XInput, 0f, _ZInput) * _MoveSpeed * _SpeedMult;
+        newVel = transform.TransformVector(newVel);
+        newVel.y = _JumpPressed ? _JumpSpeed : _RB.velocity.y;
+        _RB.velocity = newVel;
+
+        _JumpPressed = false;
     }
 
     private void UpdateCameraZoom()
     {
-        Vector3 newZoom = _PlayerCamera.localPosition;
+        var newZoom = _PlayerCamera.localPosition;
         newZoom.z += Input.mouseScrollDelta.y;
-        newZoom.z = Mathf.Clamp(newZoom.z, -24.0f, -3.0f);
+        newZoom.z = Mathf.Clamp(newZoom.z, -24f, 0f);
         _PlayerCamera.localPosition = newZoom;
     }
 
     private void UpdateRotations()
     {
-        float MouseX = Input.GetAxisRaw("Mouse X");
-        float MouseY = Input.GetAxisRaw("Mouse Y");
-
-        transform.Rotate(0.0f, MouseX, 0.0f);
-        _CameraPivot.Rotate(-MouseY, 0.0f, 0.0f);
+        var mouseX = Input.GetAxisRaw("Mouse X");
+        var mouseY = Input.GetAxisRaw("Mouse Y");
+        transform.Rotate(0f, mouseX, 0f);
+        _CameraPivot.Rotate(-mouseY, 0f, 0f);
     }
 
-    private void InputMovement()
+    private void ReadMoveInputs()
     {
         _XInput = Input.GetAxis("Horizontal");
         _ZInput = Input.GetAxis("Vertical");
-        _JumpPressed |= Input.GetKeyDown(_JumpKey);
-        _SpeedMultiply = Input.GetKey(_SprintKey) ? _SprintSpeedMultiply : 1.0f;
-
-        if(_JumpPressed)
+        _SpeedMult = Input.GetKey(_SprintKey) ? _SprintSpeedMult : 1f;
+        if (Input.GetKeyDown(_JumpKey))
         {
-            _anim.SetTrigger("Jump");
+            _JumpPressed = true;
+            _Anim.SetTrigger("Jump");
         }
-    }
-
-    private void ApplyMovePhysics()
-    {
-        Vector3 newVelocity = new Vector3(_XInput, 0.0f, _ZInput) * _MoveSpeed * _SpeedMultiply;
-        newVelocity = transform.TransformVector(newVelocity);
-        newVelocity.y = _JumpPressed ? _JumpSpeed : _rigidbody.velocity.y;
-        _rigidbody.velocity = newVelocity;
-
-        _JumpPressed = false;
     }
 
     private void SetAnimValues()
     {
-        _anim.SetFloat("Horizontal", _XInput);
-        _anim.SetFloat("Vertical", _ZInput);
-        _anim.SetFloat("SpeedMult", _SpeedMultiply);
+        _Anim.SetFloat("Horizontal", _XInput);
+        _Anim.SetFloat("Vertical", _ZInput);
+        _Anim.SetFloat("SpeedMult", _SpeedMult);
     }
+
 }

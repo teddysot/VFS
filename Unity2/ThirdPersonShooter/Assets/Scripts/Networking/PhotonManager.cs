@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private string _nickname = "Dude";
+    [SerializeField]
+    private string _NickName = "Dude";
 
-    [SerializeField] private int _teamNumber;
+    [SerializeField]
+    private int _TeamNumber = 0;
 
     private void Start()
     {
         // PhotonNetwork.SendRate = 60;
         // PhotonNetwork.SerializationRate = 20;
-        PhotonNetwork.NickName = _nickname;
+        PhotonNetwork.NickName = _NickName;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -24,27 +26,28 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             MaxPlayers = 20,
             IsVisible = true,
-            IsOpen = true
+            IsOpen = true,
+            PublishUserId = true
         };
-
         PhotonNetwork.JoinOrCreateRoom("PG15", roomOptions, TypedLobby.Default);
     }
 
     public override void OnJoinedRoom()
     {
         print($"OnJoinedRoom [{PhotonNetwork.CurrentRoom.Name}]");
-
         var clone = PhotonNetwork.Instantiate("Net_NightShade", transform.position, transform.rotation);
-        PhotonView.Get(clone).RPC("RPC_SetTeam", RpcTarget.AllBuffered, _teamNumber);
+        PhotonView.Get(clone).RPC("RPC_SetTeam", RpcTarget.AllBuffered, _TeamNumber);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        print($"[{newPlayer.NickName}, {newPlayer.UserId}] Joined our Room");
+        print($"[{newPlayer.NickName}] Joined our Room");
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        print($"OnMasterClientSwitched Master: [{newMasterClient.NickName}]");
+        print($"New master client is [{newMasterClient.NickName}]");
     }
+
+
 }
