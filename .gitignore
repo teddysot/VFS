@@ -372,3 +372,15 @@ healthchecksdb
 *.exe
 *.out
 *.app
+
+UI_UX/AirCondition/Library/
+
+UI_UX/AirCondition/Temp/
+
+*.sln
+
+UI_UX/AirCondition/Assembly-CSharp\.csproj
+
+Unity2/ThirdPersonShooter/Library/
+
+Unity2/ThirdPersonShooter/Temp/
