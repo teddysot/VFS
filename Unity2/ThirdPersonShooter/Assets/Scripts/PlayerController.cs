@@ -36,7 +36,6 @@ public class PlayerController : Unit
 
     private void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         UpdateCameraZoom();
 
         if (IsAlive == false) return;
@@ -131,9 +130,10 @@ public class PlayerController : Unit
         var mouseY = Input.GetAxisRaw("Mouse Y");
 
         transform.Rotate(0f, mouseX, 0f);
+        _CameraPivot.Rotate(-mouseY, 0.0f, 0.0f);
 
-        mouseY = Mathf.Clamp(mouseY, -90.0f, 90.0f);
-        _CameraPivot.localRotation = Quaternion.Euler(-mouseY, 0.0f, 0.0f);
+        //mouseY = Mathf.Clamp(mouseY, -90.0f, 90.0f);
+        //_CameraPivot.rotation = Quaternion.Euler(-mouseY, 0.0f, 0.0f);
     }
 
     private void ReadMoveInputs()
