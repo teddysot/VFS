@@ -43,7 +43,7 @@ public abstract class Unit : MonoBehaviour
     public void SetTeam(int teamNum)
     {
         TeamNumber = teamNum;
-        Color teamColor = GameManager.Instance.TeamColors[TeamNumber];
+        Color teamColor = GameManager.Instance.TeamColors[TeamNumber - 1];
         _Rend.material.color = teamColor;
     }
 

@@ -142,7 +142,6 @@ public class PlayerController : Unit
         _ZInput = Input.GetAxis("Vertical");
         CheckMovement();
         var speedDefault = SetSpeedMult();
-        Debug.Log(speedDefault);
         _SpeedMult = Input.GetKey(_SprintKey) ? _SprintSpeedMult : speedDefault;
         if (Input.GetKeyDown(_JumpKey))
         {

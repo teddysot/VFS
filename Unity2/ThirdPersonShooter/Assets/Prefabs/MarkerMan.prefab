@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TeamNumber: 0
   _Rend: {fileID: 5321659068694589312}
-  _LaserPrefab: {fileID: 5643400071397737426, guid: de4b9ffbd1835da4da12903ac5105c10,
+  _LaserPrefab: {fileID: 5643400071397737426, guid: fbad2dc9a57cc95438341a30d998f899,
     type: 3}
   _Health: 100
   _AttackDamage: 8
@@ -3487,7 +3487,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7317610601683482949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6b8433bf11c404aae989b416d293cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 62eadf37437c17141961962d71932061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7344567122998949649
@@ -4148,7 +4148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8589892954131151944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6b8433bf11c404aae989b416d293cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 62eadf37437c17141961962d71932061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8633913098348236526

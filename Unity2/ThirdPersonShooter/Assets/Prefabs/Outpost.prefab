@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6135669085950644674}
   - component: {fileID: 2352887088327597622}
   - component: {fileID: 5105196496337359884}
+  - component: {fileID: 3776020584303887016}
   m_Layer: 2
   m_Name: Outpost
   m_TagString: Untagged
@@ -60,6 +61,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CaptureTime: 5
+--- !u!114 &3776020584303887016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135669085950644675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a3b1af383df7d488e78878a8f39b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnObject: {fileID: 4656003389584616192, guid: 48374b7fb168b0f448d02e53f04cb5ff,
+    type: 3}
+  _spawnCooldown: 1
 --- !u!1 &6135669087239508144
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +125,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7237feaf7e9b8d47b012c216e45762c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,8 +154,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.0000038146973, y: 0, z: 0}
-    m_Extent: {x: 5.0000052, y: 0.0000001192094, z: 4.999999}
+    m_Center: {x: 0, y: 0, z: 0.00024414062}
+    m_Extent: {x: 4.9999957, y: 0.000000119209176, z: 5.00005}
   m_DirtyAABB: 0
 --- !u!183 &6135669087239508158
 Cloth:
