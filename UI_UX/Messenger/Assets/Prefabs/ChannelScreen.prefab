@@ -193,7 +193,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 1df179b7e4ce2a9469d61ce574910a65, type: 3}
+  m_Texture: {fileID: 2800000, guid: 4336ec20cc879e748b532aff2aa29f72, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -649,7 +649,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: b01252313f76e424091ff3d87a16b799, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6c977f2d7aae00d4887b26cddc40437f, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1137,17 +1137,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4272290536396822899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b478976f9481864a8b6054c9f585788, type: 3}
+  m_Script: {fileID: 11500000, guid: aba6259333232c64f8270b8b4aea0e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _screens: {fileID: 4272290536248629697}
   _clips:
-  - {fileID: 8300000, guid: 287f0777e31155e419add923367c0e55, type: 3}
-  - {fileID: 8300000, guid: d8119f27f7c3ba140be4d34da74507df, type: 3}
-  - {fileID: 8300000, guid: 7e0ed28efca326f4facccfe1322133d0, type: 3}
-  - {fileID: 8300000, guid: 2a94d7ada1591d44bb08c886940693d1, type: 3}
-  - {fileID: 8300000, guid: 44d2f5892b7901446a12f0a509378a48, type: 3}
-  - {fileID: 8300000, guid: 55c6eb61fcddfc34587192083dbcd7d8, type: 3}
+  - {fileID: 8300000, guid: 020e819a9605dc8488ad8639f1a0b0bf, type: 3}
+  - {fileID: 8300000, guid: a2402cf32b8771343ad1dd1eca3df976, type: 3}
+  - {fileID: 8300000, guid: 21a5a4ba981a5e34496693bb1482d354, type: 3}
+  - {fileID: 8300000, guid: 6e74f7ac4fea66047959148ea4c564c0, type: 3}
+  - {fileID: 8300000, guid: 63ee73887ee8cd14d89f511664309090, type: 3}
+  - {fileID: 8300000, guid: 52a3d40af0bae774c874ed69e0b175ab, type: 3}
 --- !u!82 &4272290536396822905
 AudioSource:
   m_ObjectHideFlags: 0

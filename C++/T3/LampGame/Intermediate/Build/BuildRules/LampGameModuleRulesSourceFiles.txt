@@ -1,0 +1,3 @@
+C:\Users\pg15teddy\Desktop\VFS\C++\T3\LampGame\Source\LampGame\LampGame.Build.cs
+C:\Users\pg15teddy\Desktop\VFS\C++\T3\LampGame\Source\LampGame.Target.cs
+C:\Users\pg15teddy\Desktop\VFS\C++\T3\LampGame\Source\LampGameEditor.Target.cs

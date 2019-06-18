@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\LampGame.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{3BFA6A1C-4D20-4286-8C86-8F98CF1E058B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LampGame.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\LampGameEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{F250E402-0989-49FE-955A-EE1995FFE509}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\LampGame">
+      <UniqueIdentifier>{45BD61F1-C2BD-40FA-AD6F-40A424D85074}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LampGame\LampGame.Build.cs">
+      <Filter>Source\LampGame</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\LampGame\LampGame.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LampGame\LampGame.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LampGame\LampGameCharacter.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LampGame\LampGameCharacter.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LampGame\LampGameGameMode.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LampGame\LampGameGameMode.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LampGame\LampGameHUD.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LampGame\LampGameHUD.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LampGame\LampGameProjectile.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LampGame\LampGameProjectile.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\LampGame\Lamp.h">
+      <Filter>Source\LampGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\LampGame\Lamp.cpp">
+      <Filter>Source\LampGame</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
