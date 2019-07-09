@@ -27,4 +27,9 @@ private:
 	UPROPERTY()
 	TArray<ACapturePointBase*> CapturePoints;
 
+	bool bCapturePointsDestroyed;
+
+	UPROPERTY(EditAnywhere, Category = Victory)
+	TSubclassOf<AActor> VictoryToUse;
+
 };

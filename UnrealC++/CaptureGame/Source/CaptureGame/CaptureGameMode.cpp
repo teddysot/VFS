@@ -2,6 +2,7 @@
 
 #include "CaptureGameMode.h"
 
+#include "CaptureGameVictoryText.h"
 #include "CaptureGameMode.h"
 #include "CaptureGameHUD.h"
 #include "CaptureGameCharacter.h"
@@ -39,6 +40,10 @@ void ACaptureGameMode::BeginPlay()
 
 			CapturePoints.Add(CapturePoint);
 		}
+
+		bCapturePointsDestroyed = false;
+
+
 	}
 }
 
@@ -57,11 +62,22 @@ void ACaptureGameMode::Tick(float DeltaSeconds)
 		}
 	}
 
-	if (bCaptured)
+	if (bCaptured && bCapturePointsDestroyed == false)
 	{
 		for (ACapturePointBase* CapturePoint : CapturePoints)
 		{
 			CapturePoint->Destroy();
+			bCapturePointsDestroyed = true;
+		}
+
+		// Spawn an ACaptureGameVictoryText after captured all the capturepoints
+		if (bCapturePointsDestroyed)
+		{
+			FVector Location(0.0f, 0.0f, 250.0f);
+			FRotator Rotation(0.0f, 0.0f, 0.0f);
+			FActorSpawnParameters SpawnInfo;
+			GetWorld()->SpawnActor<ACaptureGameVictoryText>(VictoryToUse, Location, Rotation, SpawnInfo);
+			bCapturePointsDestroyed = false;
 		}
 	}
 }
