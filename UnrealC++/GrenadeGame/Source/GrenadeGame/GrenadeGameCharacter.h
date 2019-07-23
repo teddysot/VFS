@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AGrenadeBase.h"
 #include "GrenadeGameCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -68,5 +69,18 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+private:
+	void ThrowGrenade();
+
+	UFUNCTION(Server, WithValidation, Reliable)
+	void ServerThrowGrenade();
+
+public:
+	UPROPERTY(EditAnywhere, Category = Grenade)
+	TSubclassOf<AAGrenadeBase> GrenadeToUse;
+
+	UPROPERTY(EditAnywhere, Category = Grenade)
+		int AmountGrenade;
 };
 

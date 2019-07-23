@@ -16,6 +16,7 @@ AGrenadeGameCharacter::AGrenadeGameCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+	AmountGrenade = 0;
 
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
@@ -56,6 +57,8 @@ void AGrenadeGameCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAction("Grenade", IE_Pressed, this, &AGrenadeGameCharacter::ThrowGrenade);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AGrenadeGameCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AGrenadeGameCharacter::MoveRight);
@@ -131,4 +134,37 @@ void AGrenadeGameCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AGrenadeGameCharacter::ThrowGrenade()
+{
+	ServerThrowGrenade();
+}
+
+void AGrenadeGameCharacter::ServerThrowGrenade_Implementation()
+{
+	UWorld* World = GetWorld();
+
+	if (World == nullptr || AmountGrenade <= 0)
+	{
+		return;
+	}
+
+	FActorSpawnParameters SpawnParam;
+	SpawnParam.Owner = this;
+	SpawnParam.Instigator = this;
+
+	FVector StartPosition = GetActorLocation();
+	StartPosition += GetActorForwardVector() * 150.0f;
+	StartPosition.Z += 40.0f;
+
+	FRotator StartRotation = GetActorForwardVector().Rotation();
+
+	World->SpawnActor(GrenadeToUse, &StartPosition, &StartRotation, SpawnParam);
+	AmountGrenade--;
+}
+
+bool AGrenadeGameCharacter::ServerThrowGrenade_Validate()
+{
+	return true;
 }

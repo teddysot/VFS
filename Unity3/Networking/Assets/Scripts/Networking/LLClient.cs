@@ -1,0 +1,371 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using GameSavvy.Byterizer;
+using UnityEngine;
+using UnityEngine.Networking;
+
+namespace LLNet
+{
+    public class LLClient : MonoBehaviour
+    {
+        public Dictionary<int, NetUser> NetUsers { get; private set; }
+        public byte ReliableChannel { get; private set; }
+        public byte UnreliableChannel { get; private set; }
+        
+        public int MyConnectionId;
+
+        private int _SocketId = 0;
+        private int _ServerConnectionId = 0;
+
+        [SerializeField]
+        private string _ServerAddress = "127.0.0.1";
+
+        [SerializeField]
+        private int _ServerPort = 27000;
+
+        [SerializeField]
+        private int _BufferSize = 1024;
+
+        [SerializeField]
+        private byte _ThreadPoolSize = 3;
+
+        [SerializeField]
+        private string _UserName;
+        public string UserName { get => _UserName; }
+
+        [SerializeField]
+        private int _TeamNumber;
+        public int TeamNumber { get => _TeamNumber; }
+
+        
+
+        private void Start()
+        {
+            ConnectToServer();
+        }
+
+        private void ConnectToServer()
+        {
+            NetUsers = new Dictionary<int, NetUser>();
+
+            GlobalConfig globalConfig = new GlobalConfig()
+            {
+                ThreadPoolSize = _ThreadPoolSize
+            };
+
+            NetworkTransport.Init(globalConfig);
+
+            ConnectionConfig connectionConfig = new ConnectionConfig()
+            {
+                SendDelay = 0,
+                MinUpdateTimeout = 1
+            };
+            ReliableChannel = connectionConfig.AddChannel(QosType.Reliable);
+            UnreliableChannel = connectionConfig.AddChannel(QosType.Unreliable);
+
+            HostTopology hostTopology = new HostTopology(connectionConfig, 16);
+            _SocketId = NetworkTransport.AddHost(hostTopology, 0);
+
+            byte error;
+            _ServerConnectionId = NetworkTransport.Connect(_SocketId, _ServerAddress, _ServerPort, 0, out error);
+
+            if (error == 0)
+            {
+                StartCoroutine(Receiver());
+                Debug.Log($"@ConnectToServer -> {_SocketId} - {_ServerConnectionId}");
+            }
+            else
+            {
+                Debug.LogError($"@ConnectToServer -> {error}");
+            }
+
+        }
+
+        private IEnumerator Receiver()
+        {
+            int recSocketId, recConnectionId, recChannelId, recDataSize;
+            byte error;
+            byte[] recBuffer = new byte[_BufferSize];
+
+            while (true)
+            {
+                var netEventType = NetworkTransport.Receive
+                (
+                    out recSocketId,
+                    out recConnectionId,
+                    out recChannelId,
+                    recBuffer,
+                    _BufferSize,
+                    out recDataSize,
+                    out error
+                );
+
+                switch (netEventType)
+                {
+                    case NetworkEventType.Nothing:
+                        {
+                            yield return null;
+                            break;
+                        }
+
+                    case NetworkEventType.DataEvent:
+                        {
+                            OnDataEvent(recChannelId, recBuffer, recDataSize);
+                            break;
+                        }
+
+                    case NetworkEventType.ConnectEvent:
+                        {
+                            Debug.Log($"@Receiver.Connect -> Socket = [{recSocketId}], userId = [{recConnectionId}]");
+                            break;
+                        }
+
+                    case NetworkEventType.DisconnectEvent:
+                        {
+                            Debug.Log($"@Receiver.Disconnect -> Socket = [{recSocketId}], userId = [{recConnectionId}]");
+                            break;
+                        }
+
+                    default:
+                        {
+                            Debug.Log($"@Receiver -> Unrecognized Net Message Type [{netEventType.ToString()}]");
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void OnDataEvent(int channelId, byte[] data, int dataSize)
+        {
+            var byteStream = new ByteStream();
+            NetMessageType msgType = (NetMessageType)byteStream.PopByte();
+
+            //string msg = System.Text.Encoding.UTF8.GetString(data, 0, dataSize);
+            //string[] msgData = msg.Split('|');
+            //Debug.Log($"Msg: {}");
+            
+        }
+
+        private void OnConnectionAck(ByteStream msgData)
+        {
+            // if (int.TryParse(msgData[1], out var conId) == false)
+            // {
+            //     Debug.LogError("@Client.ConnectionAck -> Wrong Message Format");
+            //     return;
+            // }
+
+            var conId = msgData.PopInt32();
+
+            var meUser = new NetUser()
+            {
+                ConnectionID = conId,
+                UserName = _UserName,
+                TeamNumber = _TeamNumber
+            };
+
+            NetUsers[conId] = meUser;
+            MyConnectionId = conId;
+
+            //var msg = $"USER_INFO|{_UserName}|{_TeamNumber}";
+
+            var msg = new ByteStream();
+            msg.Encode
+            (
+                (byte)NetMessageType.USER_INFO,
+                _UserName,
+                _TeamNumber
+            );
+            SendNetMessage(ReliableChannel, msg.ToArray());
+
+            Debug.Log($"@Client -> MyConnectionId [{conId}]");
+        }
+
+        private void OnDisconnectionAck(ByteStream msgData)
+        {
+            // if (int.TryParse(msgData[1], out var conId) == false)
+            // {
+            //     Debug.LogError("@Client.DisconnectionAck -> Wrong Message Format");
+            //     return;
+            // }
+
+            var conId = msgData.PopInt32();
+
+            var meUser = new NetUser()
+            {
+                ConnectionID = conId,
+                UserName = _UserName,
+                TeamNumber = _TeamNumber
+            };
+
+            NetUsers[conId] = meUser;
+            MyConnectionId = conId;
+
+            //var msg = $"USER_INFO|{_UserName}|{_TeamNumber}";
+
+            var msg = new ByteStream();
+            msg.Encode
+            (
+                (byte)NetMessageType.USER_INFO,
+                _UserName,
+                _TeamNumber
+            );
+
+            NetUsers.Remove(conId);
+
+            Debug.Log($"@Client -> DisconnectId [{conId}]");
+        }
+
+        private void OnUserInfo(ByteStream msgData)
+        {
+            //int.TryParse(msgData[1], out var conId);
+            //var userName = msgData[2];
+            //int.TryParse(msgData[3], out var teamNum);
+
+            var conId = msgData.PopInt32();
+            var userName = msgData.PopString();
+            var teamNum = msgData.PopInt32();
+
+            var newUser = new NetUser()
+            {
+                ConnectionID = conId,
+                UserName = userName,
+                TeamNumber = teamNum
+            };
+
+            NetUsers[conId] = newUser;
+        }
+
+        private void OnChatWhisper(ByteStream msgData)
+        {
+            // Byterizer: (byte)MsgType, (int)targetUser, (string)msg, (int)sender
+            //int.TryParse(msgData[3], out var sender);
+            var targetUser = msgData.PopInt32();
+            var msg = msgData.PopString();
+            var sender = msgData.PopInt32();
+            AddMessageToQueue($"[Whisper from {NetUsers[sender].UserName}] {msg}");
+        }
+
+        private void OnChatBroadcast(ByteStream msgData)
+        {
+            //int.TryParse(msgData[2], out var sender);
+            var msg = msgData.PopString();
+            var sender = msgData.PopInt32();
+            AddMessageToQueue($"[BC from {NetUsers[sender].UserName}] {msg}");
+        }
+
+        private void OnChatTeam(ByteStream msgData)
+        {
+            //int.TryParse(msgData[3], out var sender);
+            var sender = msgData.PopInt32();
+            var msg = msgData.PopString();
+
+            Debug.Log($"Msgs: {msgData.ToString()}");
+
+            AddMessageToQueue($"[TEAM from {NetUsers[sender].UserName}] {msg}");
+        }
+
+
+        public void SendNetMessage(byte channelId, byte[] data)
+        {
+            //byte[] data = System.Text.Encoding.UTF8.GetBytes(msg);
+            NetworkTransport.Send
+            (
+                _SocketId,
+                _ServerConnectionId,
+                channelId,
+                data,
+                data.Length,
+                out var error
+            );
+
+            if (error != 0)
+            {
+                Debug.LogError($"@Client -> Error: [{error}] : Could Not Send Message To Server");
+            }
+        }
+
+
+
+
+
+        private Queue<string> _ChatMessages = new Queue<string>();
+        private void AddMessageToQueue(string msg)
+        {
+            _ChatMessages.Enqueue(msg);
+            if (_ChatMessages.Count >= 20)
+            {
+                _ChatMessages.Dequeue();
+            }
+        }
+
+        private string _MsgToSend;
+        private void OnGUI()
+        {
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.BeginVertical();
+                {
+                    GUILayout.Space(32);
+                    _MsgToSend = GUILayout.TextField(_MsgToSend);
+
+                    GUILayout.Space(32);
+                    if (GUILayout.Button("TEAMCHAT"))
+                    {
+                        //var msg = $"TEAM|{_TeamNumber}|{_MsgToSend}";
+                        var msg = new ByteStream();
+                        msg.Encode((byte)NetMessageType.CHAT_TEAM_MESSAGE, _TeamNumber, _MsgToSend);
+
+                        SendNetMessage(ReliableChannel, msg.ToArray());
+                        AddMessageToQueue($"TEAM > {_MsgToSend}");
+                        _MsgToSend = "";
+                    }
+
+                    GUILayout.Space(32);
+                    if (GUILayout.Button("BROADCAST"))
+                    {
+                        //var msg = $"BROADCAST|{_MsgToSend}";
+                        var msg = new ByteStream();
+                        msg.Encode((byte)NetMessageType.CHAT_BROADCAST, _MsgToSend);
+
+                        SendNetMessage(ReliableChannel, msg.ToArray());
+                        AddMessageToQueue($"BC > {_MsgToSend}");
+                        _MsgToSend = "";
+                    }
+                    GUILayout.Space(32);
+                    GUILayout.Label("Users Connected");
+                    GUILayout.Space(32);
+                    foreach (var user in NetUsers)
+                    {
+                        if (GUILayout.Button($"{user.Key} - {user.Value.UserName}"))
+                        {
+                            //var msg = $"WHISPER|{user.Key}|{_MsgToSend}";
+                            var msg = new ByteStream();
+                            msg.Encode((byte)NetMessageType.CHAT_WHISPER, user.Value.ConnectionID, _MsgToSend);
+                            SendNetMessage(ReliableChannel, msg.ToArray());
+                            AddMessageToQueue($">>>> {_MsgToSend}");
+                            _MsgToSend = "";
+                        }
+                    }
+                }
+                GUILayout.EndVertical();
+
+                GUILayout.Space(40); // Horizontal space
+
+                GUILayout.BeginVertical();
+                {
+                    GUILayout.Label("Chat Messages");
+                    GUILayout.Space(32);
+                    foreach (var msg in _ChatMessages)
+                    {
+                        GUILayout.Label($"- {msg}");
+                    }
+                }
+                GUILayout.EndVertical();
+            }
+            GUILayout.EndHorizontal();
+        }
+
+    }//Class
+
+}//NameSpace
