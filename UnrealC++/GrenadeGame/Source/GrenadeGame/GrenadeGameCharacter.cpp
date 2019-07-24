@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Net/UnrealNetwork.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AGrenadeGameCharacter
@@ -16,7 +17,7 @@ AGrenadeGameCharacter::AGrenadeGameCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	AmountGrenade = 0;
+	GrenadeCount = 0;
 
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
@@ -145,7 +146,7 @@ void AGrenadeGameCharacter::ServerThrowGrenade_Implementation()
 {
 	UWorld* World = GetWorld();
 
-	if (World == nullptr || AmountGrenade <= 0)
+	if (World == nullptr || GrenadeCount <= 0)
 	{
 		return;
 	}
@@ -161,10 +162,15 @@ void AGrenadeGameCharacter::ServerThrowGrenade_Implementation()
 	FRotator StartRotation = GetActorForwardVector().Rotation();
 
 	World->SpawnActor(GrenadeToUse, &StartPosition, &StartRotation, SpawnParam);
-	AmountGrenade--;
+	GrenadeCount--;
 }
 
 bool AGrenadeGameCharacter::ServerThrowGrenade_Validate()
 {
 	return true;
+}
+
+void AGrenadeGameCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	DOREPLIFETIME(AGrenadeGameCharacter, GrenadeCount);
 }

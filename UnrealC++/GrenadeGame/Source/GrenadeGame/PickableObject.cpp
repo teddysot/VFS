@@ -34,7 +34,7 @@ void APickableObject::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActo
 	{
 		AGrenadeGameCharacter* Character = Cast<AGrenadeGameCharacter>(OtherActor);
 
-		Character->AmountGrenade++;
+		Character->GrenadeCount++;
 		Destroy();
 	}
 }

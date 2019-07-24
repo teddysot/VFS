@@ -73,6 +73,8 @@ public:
 private:
 	void ThrowGrenade();
 
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+
 	UFUNCTION(Server, WithValidation, Reliable)
 	void ServerThrowGrenade();
 
@@ -80,7 +82,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Grenade)
 	TSubclassOf<AAGrenadeBase> GrenadeToUse;
 
-	UPROPERTY(EditAnywhere, Category = Grenade)
-		int AmountGrenade;
+	UPROPERTY(EditAnywhere, Category = Grenade, Replicated)
+		int GrenadeCount;
 };
 

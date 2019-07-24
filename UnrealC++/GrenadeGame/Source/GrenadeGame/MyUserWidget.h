@@ -6,12 +6,19 @@
 #include "Blueprint/UserWidget.h"
 #include "MyUserWidget.generated.h"
 
+class UTextBlock;
+
 /**
- * 
+ *
  */
 UCLASS()
 class GRENADEGAME_API UMyUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+	virtual bool Initialize() override;
+
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	UTextBlock* Widget;
 };
