@@ -111,7 +111,76 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 27bed7bc0404bac44b509520ea6e3e26, type: 2}
+--- !u!1001 &123154772
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6178775571014990325, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_Name
+      value: Plane
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636382375437037456, guid: 6a1db03c134ae5b4896f75be19d8367a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a1db03c134ae5b4896f75be19d8367a, type: 3}
 --- !u!1 &419613595
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,11 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf9ffb80543ba8488528a743731b209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyConnectionId: 0
+  playerPrefab: {fileID: 4551645374296152400, guid: 38d51abf0fc553b459b7639897ead0f1,
+    type: 3}
+  _NetMessages: {fileID: 11400000, guid: e406a60b41dd03549a6cdd94adfdbe76, type: 2}
   _ServerAddress: 127.0.0.1
   _ServerPort: 27000
   _BufferSize: 1024
   _ThreadPoolSize: 3
-  _UserName: WCampos
+  _UserName: WCampos1
   _TeamNumber: 1
 --- !u!4 &419613597
 Transform:
@@ -732,9 +805,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc8b49b4278bd34d8afd2373ac72756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 4551645374296152400, guid: 38d51abf0fc553b459b7639897ead0f1,
+    type: 3}
   _ServerPort: 27000
   _BufferSize: 1024
   _ThreadPoolSize: 3
+  _NetMessages: {fileID: 11400000, guid: e406a60b41dd03549a6cdd94adfdbe76, type: 2}
 --- !u!4 &1677000657
 Transform:
   m_ObjectHideFlags: 0

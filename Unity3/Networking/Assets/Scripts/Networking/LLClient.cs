@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameSavvy.Byterizer;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 
 namespace LLNet
@@ -12,8 +13,12 @@ namespace LLNet
         public Dictionary<int, NetUser> NetUsers { get; private set; }
         public byte ReliableChannel { get; private set; }
         public byte UnreliableChannel { get; private set; }
-        
+
         public int MyConnectionId;
+        public GameObject playerPrefab;
+
+        [SerializeField]
+        private NetMessageContainer _NetMessages;
 
         private int _SocketId = 0;
         private int _ServerConnectionId = 0;
@@ -38,7 +43,6 @@ namespace LLNet
         private int _TeamNumber;
         public int TeamNumber { get => _TeamNumber; }
 
-        
 
         private void Start()
         {
@@ -79,7 +83,6 @@ namespace LLNet
             {
                 Debug.LogError($"@ConnectToServer -> {error}");
             }
-
         }
 
         private IEnumerator Receiver()
@@ -90,6 +93,7 @@ namespace LLNet
 
             while (true)
             {
+                MovePlayer();
                 var netEventType = NetworkTransport.Receive
                 (
                     out recSocketId,
@@ -138,133 +142,25 @@ namespace LLNet
 
         private void OnDataEvent(int channelId, byte[] data, int dataSize)
         {
-            var byteStream = new ByteStream();
-            NetMessageType msgType = (NetMessageType)byteStream.PopByte();
-
-            //string msg = System.Text.Encoding.UTF8.GetString(data, 0, dataSize);
-            //string[] msgData = msg.Split('|');
-            //Debug.Log($"Msg: {}");
-            
+            var msgData = new ByteStream(data, dataSize);
+            NetMessageType msgType = (NetMessageType)msgData.PopByte();
+            _NetMessages.NetMessagesMap[msgType].Client_ReceiveMessage(msgData, this);
         }
 
-        private void OnConnectionAck(ByteStream msgData)
+        public void MovePlayer()
         {
-            // if (int.TryParse(msgData[1], out var conId) == false)
-            // {
-            //     Debug.LogError("@Client.ConnectionAck -> Wrong Message Format");
-            //     return;
-            // }
-
-            var conId = msgData.PopInt32();
-
-            var meUser = new NetUser()
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                ConnectionID = conId,
-                UserName = _UserName,
-                TeamNumber = _TeamNumber
-            };
-
-            NetUsers[conId] = meUser;
-            MyConnectionId = conId;
-
-            //var msg = $"USER_INFO|{_UserName}|{_TeamNumber}";
-
-            var msg = new ByteStream();
-            msg.Encode
-            (
-                (byte)NetMessageType.USER_INFO,
-                _UserName,
-                _TeamNumber
-            );
-            SendNetMessage(ReliableChannel, msg.ToArray());
-
-            Debug.Log($"@Client -> MyConnectionId [{conId}]");
+                Debug.Log("Mouse Clicked!");
+                var msg = new ByteStream();
+                msg.Encode
+                (
+                    (byte)NetMessageType.PLAYER_MOVE
+                );
+                
+                SendNetMessage(ReliableChannel, msg.ToArray());
+            }
         }
-
-        private void OnDisconnectionAck(ByteStream msgData)
-        {
-            // if (int.TryParse(msgData[1], out var conId) == false)
-            // {
-            //     Debug.LogError("@Client.DisconnectionAck -> Wrong Message Format");
-            //     return;
-            // }
-
-            var conId = msgData.PopInt32();
-
-            var meUser = new NetUser()
-            {
-                ConnectionID = conId,
-                UserName = _UserName,
-                TeamNumber = _TeamNumber
-            };
-
-            NetUsers[conId] = meUser;
-            MyConnectionId = conId;
-
-            //var msg = $"USER_INFO|{_UserName}|{_TeamNumber}";
-
-            var msg = new ByteStream();
-            msg.Encode
-            (
-                (byte)NetMessageType.USER_INFO,
-                _UserName,
-                _TeamNumber
-            );
-
-            NetUsers.Remove(conId);
-
-            Debug.Log($"@Client -> DisconnectId [{conId}]");
-        }
-
-        private void OnUserInfo(ByteStream msgData)
-        {
-            //int.TryParse(msgData[1], out var conId);
-            //var userName = msgData[2];
-            //int.TryParse(msgData[3], out var teamNum);
-
-            var conId = msgData.PopInt32();
-            var userName = msgData.PopString();
-            var teamNum = msgData.PopInt32();
-
-            var newUser = new NetUser()
-            {
-                ConnectionID = conId,
-                UserName = userName,
-                TeamNumber = teamNum
-            };
-
-            NetUsers[conId] = newUser;
-        }
-
-        private void OnChatWhisper(ByteStream msgData)
-        {
-            // Byterizer: (byte)MsgType, (int)targetUser, (string)msg, (int)sender
-            //int.TryParse(msgData[3], out var sender);
-            var targetUser = msgData.PopInt32();
-            var msg = msgData.PopString();
-            var sender = msgData.PopInt32();
-            AddMessageToQueue($"[Whisper from {NetUsers[sender].UserName}] {msg}");
-        }
-
-        private void OnChatBroadcast(ByteStream msgData)
-        {
-            //int.TryParse(msgData[2], out var sender);
-            var msg = msgData.PopString();
-            var sender = msgData.PopInt32();
-            AddMessageToQueue($"[BC from {NetUsers[sender].UserName}] {msg}");
-        }
-
-        private void OnChatTeam(ByteStream msgData)
-        {
-            //int.TryParse(msgData[3], out var sender);
-            var sender = msgData.PopInt32();
-            var msg = msgData.PopString();
-
-            Debug.Log($"Msgs: {msgData.ToString()}");
-
-            AddMessageToQueue($"[TEAM from {NetUsers[sender].UserName}] {msg}");
-        }
-
 
         public void SendNetMessage(byte channelId, byte[] data)
         {
@@ -285,12 +181,8 @@ namespace LLNet
             }
         }
 
-
-
-
-
         private Queue<string> _ChatMessages = new Queue<string>();
-        private void AddMessageToQueue(string msg)
+        public void AddMessageToQueue(string msg)
         {
             _ChatMessages.Enqueue(msg);
             if (_ChatMessages.Count >= 20)

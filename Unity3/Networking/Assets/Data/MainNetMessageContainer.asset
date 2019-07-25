@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _NetMessages:
   - {fileID: 11400000, guid: 3f9a79ddbfdbee64bbd4e47a31a2e277, type: 2}
+  - {fileID: 11400000, guid: f2bcd11c05330dd4899ea32f27f18b8d, type: 2}
+  - {fileID: 11400000, guid: ee40cc5240dff71409006bef3fcdaff7, type: 2}
+  - {fileID: 11400000, guid: e4e19514254120a408f19af4a7fcd1b6, type: 2}
+  - {fileID: 11400000, guid: b66ead925f15c054e9a7be46113ee9b9, type: 2}
+  - {fileID: 11400000, guid: b361cc784e150334fb495915cfcf4faf, type: 2}
+  - {fileID: 11400000, guid: d5a8f3b4d7ae3c441bea35d931860f2a, type: 2}
+  - {fileID: 11400000, guid: eb0a8ceb51daef34887b9bbeedeed772, type: 2}

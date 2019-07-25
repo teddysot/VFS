@@ -10,7 +10,7 @@ namespace LLNet
         [SerializeField]
         private ANetMessage[] _NetMessages;
 
-        public Dictionary<NetMessageType, ANetMessage> NetMessageMap { get; private set; }
+        public Dictionary<NetMessageType, ANetMessage> NetMessagesMap { get; private set; }
 
         private void OnEnable() 
         {
@@ -19,20 +19,20 @@ namespace LLNet
 
         private void MapMessages()
         {
-            NetMessageMap = new Dictionary<NetMessageType, ANetMessage>(_NetMessages.Length);
+            NetMessagesMap = new Dictionary<NetMessageType, ANetMessage>(_NetMessages.Length);
 
             foreach (var item in _NetMessages)
             {
-                if(item == null || NetMessageMap.ContainsKey(item.MessageType))
+                if(item == null || NetMessagesMap.ContainsKey(item.MessageType))
                 {
                     Debug.LogWarning($"Cannot Add Message [{item}]");
                 }
                 else
                 {
-                    NetMessageMap[item.MessageType] = item;
+                    NetMessagesMap[item.MessageType] = item;
                 }
             }
-            Debug.Log($"Mapping Done! -> Added [{NetMessageMap.Count}] Messages");
+            Debug.Log($"Mapping Done! -> Added [{NetMessagesMap.Count}] Messages");
         }
 
     }

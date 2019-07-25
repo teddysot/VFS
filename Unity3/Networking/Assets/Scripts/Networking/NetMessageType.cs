@@ -7,7 +7,9 @@ namespace LLNet
         USER_INFO,
         CHAT_WHISPER,
         CHAT_BROADCAST,
-        CHAT_TEAM_MESSAGE
+        CHAT_TEAM_MESSAGE,
+        SPAWN_PLAYER,
+        PLAYER_MOVE
     }
 
 }// Namescape

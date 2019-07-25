@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace LLNet
 {
     public class NetUser
@@ -5,5 +7,6 @@ namespace LLNet
         public int ConnectionID = -1;
         public string UserName = "NoName";
         public int TeamNumber = -1;
+        public GameObject PlayerObject;
     }
 }// Namescape

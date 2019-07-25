@@ -5,7 +5,7 @@ using GameSavvy.Byterizer;
 [CreateAssetMenu(menuName = "LLNet/Messages/ConnectionAck")]
 public class Message_ConnectionAck : ANetMessage
 {
-    private void OnEnable() 
+    private void OnEnable()
     {
         MessageType = NetMessageType.CONNECTION_ACK;
     }
@@ -14,28 +14,43 @@ public class Message_ConnectionAck : ANetMessage
     {
         var conId = data.PopInt32();
 
-            var meUser = new NetUser()
-            {
-                ConnectionID = conId,
-                UserName = client.UserName,
-                TeamNumber = client.TeamNumber
-            };
+        var meUser = new NetUser()
+        {
+            ConnectionID = conId,
+            UserName = client.UserName,
+            TeamNumber = client.TeamNumber
+        };
 
-            client.NetUsers[conId] = meUser;
-            client.MyConnectionId = conId;
+        client.NetUsers[conId] = meUser;
+        client.MyConnectionId = conId;
 
-            //var msg = $"USER_INFO|{_UserName}|{_TeamNumber}";
+        var msg = new ByteStream();
+        msg.Encode
+        (
+            (byte)NetMessageType.USER_INFO,
+            client.UserName,
+            client.TeamNumber
+        );
 
-            var msg = new ByteStream();
-            msg.Encode
-            (
-                (byte)NetMessageType.USER_INFO,
-                client.UserName,
-                client.TeamNumber
-            );
-            client.SendNetMessage(client.ReliableChannel, msg.ToArray());
+        client.SendNetMessage(client.ReliableChannel, msg.ToArray());
 
-            Debug.Log($"@Client -> MyConnectionId [{conId}]");
+        var playerClone = Instantiate(client.playerPrefab, Vector3.zero, Quaternion.identity);
+
+        client.NetUsers[conId].PlayerObject = playerClone;
+
+        var msg2 = new ByteStream();
+        msg2.Encode
+        (
+            (byte)NetMessageType.SPAWN_PLAYER,
+            playerClone.transform.position,
+            playerClone.transform.rotation
+        );
+
+        client.SendNetMessage(client.ReliableChannel, msg2.ToArray());
+
+        Debug.Log($"{client.UserName} Send Spawn Message");
+
+        Debug.Log($"@Client -> MyConnectionId [{conId}]");
     }
 
     public override void Server_ReceiveMessage(int connectionId, ByteStream data, LLServer server)
